@@ -97,6 +97,32 @@ struct IngrediaTests {
     }
 
     @Test
+    func productAssessmentReportsUnknownWithoutProfileWhenProductDataIsMissing() {
+        let product = makeProduct()
+
+        let assessment = AlternativeRankingService.assessment(for: product, profile: nil)
+
+        #expect(assessment.result.level == .unknown)
+        #expect(assessment.dataQuality == .unknown)
+        #expect(assessment.completenessScore == 0)
+    }
+
+    @Test
+    func productAssessmentReportsHighConfidenceWithoutProfileWhenCoreDataExists() {
+        let product = makeProduct(
+            ingredientsText: "Cocoa mass, sugar",
+            allergens: ["en:soybeans"],
+            categoryLabels: ["Chocolate bars"]
+        )
+
+        let assessment = AlternativeRankingService.assessment(for: product, profile: nil)
+
+        #expect(assessment.result.level == .unknown)
+        #expect(assessment.dataQuality == .highConfidence)
+        #expect(assessment.completenessScore == 3)
+    }
+
+    @Test
     func alternativeRankingPrefersMoreCompleteDataWhenSafetyLevelMatches() {
         let profile = UserProfile(allergenIDs: ["milk"], rejectMayContain: true)
         let source = makeProduct(

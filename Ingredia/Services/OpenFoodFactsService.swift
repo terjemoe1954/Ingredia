@@ -177,11 +177,7 @@ final class OpenFoodFactsService {
         }
 
         var request = URLRequest(url: url)
-        // Replace contact information before publishing to the App Store.
-        request.setValue(
-            "Ingredia/0.1 (iOS; contact: replace-with-your-email@example.com)",
-            forHTTPHeaderField: "User-Agent"
-        )
+        request.setValue(AppMetadata.userAgent, forHTTPHeaderField: "User-Agent")
 
         let (data, response): (Data, URLResponse)
         do {

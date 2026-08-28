@@ -1,0 +1,262 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 1801 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(INGREDIA APP STORE METADATA DRAFT) Tj
+T*
+() Tj
+T*
+(Last updated: August 28, 2026) Tj
+T*
+() Tj
+T*
+(APP NAME) Tj
+T*
+() Tj
+T*
+(Ingredia) Tj
+T*
+() Tj
+T*
+(SUBTITLE) Tj
+T*
+() Tj
+T*
+(Allergy-aware food barcode scanner) Tj
+T*
+() Tj
+T*
+(PROMOTIONAL TEXT) Tj
+T*
+() Tj
+T*
+(Scan packaged food, compare it against your allergy profile, and review better ) Tj
+T*
+(alternatives when available. Always verify the packaging and the manufacturer’s latest ) Tj
+T*
+(information.) Tj
+T*
+() Tj
+T*
+(KEYWORDS) Tj
+T*
+() Tj
+T*
+(allergy,allergen,food scanner,barcode,ingredients,intolerance,restaurant card,product ) Tj
+T*
+(checker) Tj
+T*
+() Tj
+T*
+(SHORT POSITIONING) Tj
+T*
+() Tj
+T*
+(Ingredia helps users review packaged food products against a personal allergy or ) Tj
+T*
+(intolerance profile. The app scans a barcode, fetches available product data, explains ) Tj
+T*
+(possible conflicts, and may suggest better alternatives in the same category.) Tj
+T*
+() Tj
+T*
+(FULL DESCRIPTION) Tj
+T*
+() Tj
+T*
+(Ingredia helps you review packaged food products against your personal allergy or ) Tj
+T*
+(intolerance profile.) Tj
+T*
+() Tj
+T*
+(Scan a barcode, fetch product information, compare it with your active profile, and get ) Tj
+T*
+(a clearer view of what needs extra attention. When relevant data is available, Ingredia ) Tj
+T*
+(can also suggest better alternatives from the same or a similar category.) Tj
+T*
+() Tj
+T*
+(Ingredia is designed to help users find important product information faster, while ) Tj
+T*
+(keeping the language conservative. The app does not guarantee that a product is safe. ) Tj
+T*
+(Always verify the packaging, ingredient list, allergen labeling, trace warnings, and the) Tj
+T*
+( manufacturer’s latest information.) Tj
+T*
+() Tj
+T*
+(CORE FEATURES) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 1665 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(• Barcode scanning for packaged food products) Tj
+T*
+(• Personal allergy and intolerance profiles) Tj
+T*
+(• Support for cross-contamination preference) Tj
+T*
+(• Product assessment with clear status labels) Tj
+T*
+(• Explanation of detected conflicts) Tj
+T*
+(• Product data confidence indicator) Tj
+T*
+(• Better alternative suggestions when available) Tj
+T*
+(• Local scan history) Tj
+T*
+(• Restaurant allergy card) Tj
+T*
+(• In-app help) Tj
+T*
+() Tj
+T*
+(CURRENT LANGUAGE SUPPORT) Tj
+T*
+() Tj
+T*
+(• Norwegian) Tj
+T*
+(• English) Tj
+T*
+(• Thai) Tj
+T*
+() Tj
+T*
+(IMPORTANT LIMITATIONS) Tj
+T*
+() Tj
+T*
+(• Product information depends on external database coverage) Tj
+T*
+(• Some products may be missing, incomplete, outdated, or incorrect) Tj
+T*
+(• International coverage varies by market) Tj
+T*
+(• Fresh product lookups and alternative search require internet access) Tj
+T*
+() Tj
+T*
+(SAFETY NOTICE) Tj
+T*
+() Tj
+T*
+(Ingredia is a decision-support tool only. It is not a substitute for food packaging, ) Tj
+T*
+(manufacturer information, or professional medical advice.) Tj
+T*
+() Tj
+T*
+(CATEGORY SUGGESTIONS) Tj
+T*
+() Tj
+T*
+(• Primary: `Food & Drink`) Tj
+T*
+(• Secondary: `Medical`) Tj
+T*
+() Tj
+T*
+(AGE RATING NOTES) Tj
+T*
+() Tj
+T*
+(Likely low age rating, assuming no user-generated public sharing, advertising, or ) Tj
+T*
+(unrestricted web content is added before release.) Tj
+T*
+() Tj
+T*
+(PRIVACY NUTRITION LABEL DRAFT NOTES) Tj
+T*
+() Tj
+T*
+(Based on the current implementation:) Tj
+T*
+() Tj
+T*
+(• Camera access: yes) Tj
+T*
+(• Contact info collection: no in-app collection currently) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 358 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(• Health data: not collected as Apple Health data, but the app does store allergy ) Tj
+T*
+(preferences locally) Tj
+T*
+(• Tracking: no) Tj
+T*
+(• Third-party advertising: no) Tj
+T*
+(• Analytics SDKs: none currently) Tj
+T*
+() Tj
+T*
+(This still needs final review in App Store Connect before submission.) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R] /Count 3 >>
+endobj
+10 0 obj
+<< /Type /Catalog /Pages 9 0 R >>
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000002013 00000 n 
+0000002149 00000 n 
+0000003866 00000 n 
+0000004002 00000 n 
+0000004411 00000 n 
+0000004547 00000 n 
+0000004616 00000 n 
+trailer
+<< /Size 11 /Root 10 0 R >>
+startxref
+4666
+%%EOF

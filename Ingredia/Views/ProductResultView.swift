@@ -18,8 +18,12 @@ struct ProductResultView: View {
     @State private var alternativeOutcome: AlternativeLookupOutcome?
     @State private var selectedAlternativeProduct: ScannedProduct?
 
+    private var productAssessment: ProductSafetyAssessment {
+        AlternativeRankingService.assessment(for: product, profile: profile)
+    }
+
     private var result: SafetyResult {
-        SafetyAnalyzer.analyze(product: product, profile: profile)
+        productAssessment.result
     }
 
     var body: some View {
@@ -35,6 +39,10 @@ struct ProductResultView: View {
                     assessmentCard
                 }
 
+                Section(AppText.text(.productDataConfidence, language: language)) {
+                    dataQualityCard
+                }
+
                 if !result.findings.isEmpty {
                     Section(AppText.text(.profileMatches, language: language)) {
                         ForEach(result.findings) { finding in
@@ -47,7 +55,16 @@ struct ProductResultView: View {
                     if isLoadingAlternatives {
                         ProgressView(AppText.text(.lookingForAlternatives, language: language))
                     } else if let alternativesErrorMessage {
-                        infoMessage(alternativesErrorMessage)
+                        VStack(alignment: .leading, spacing: 12) {
+                            infoMessage(alternativesErrorMessage)
+
+                            Button(AppText.text(.alternativeRetry, language: language)) {
+                                Task {
+                                    await loadAlternatives()
+                                }
+                            }
+                            .font(.subheadline.weight(.semibold))
+                        }
                     } else if let alternativeOutcome {
                         switch alternativeOutcome {
                         case .results(let products):
@@ -338,6 +355,52 @@ struct ProductResultView: View {
             .foregroundStyle(.secondary)
             .padding(.vertical, 6)
             .accessibilityElement(children: .combine)
+    }
+
+    private var dataQualityCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(productAssessment.dataQuality.title)
+                .font(.headline)
+
+            Text(productAssessment.dataQuality.detail)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+
+            Divider()
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(AppText.text(.productDataUpdated, language: language))
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+
+                if let lastModifiedAt = product.lastModifiedAt {
+                    Text(lastModifiedAt.formatted(date: .abbreviated, time: .omitted))
+                        .font(.subheadline)
+                        .foregroundStyle(.primary)
+                } else {
+                    Text(AppText.text(.productDataUpdatedUnavailable, language: language))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color(.secondarySystemGroupedBackground))
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            [
+                AppText.text(.productDataConfidence, language: language),
+                productAssessment.dataQuality.title,
+                productAssessment.dataQuality.detail,
+                AppText.text(.productDataUpdated, language: language),
+                product.lastModifiedAt?.formatted(date: .abbreviated, time: .omitted)
+                ?? AppText.text(.productDataUpdatedUnavailable, language: language)
+            ].joined(separator: ", ")
+        )
     }
 
     private var hasLimitedProductData: Bool {

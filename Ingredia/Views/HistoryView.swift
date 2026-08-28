@@ -2,9 +2,11 @@ import SwiftUI
 import SwiftData
 
 struct HistoryView: View {
+    @Environment(\.modelContext) private var modelContext
     @Query(sort: \ScannedProduct.lastScanned, order: .reverse) private var products: [ScannedProduct]
     @Query(sort: \UserProfile.createdAt) private var profiles: [UserProfile]
     @AppStorage(AppLanguage.storageKey) private var selectedLanguage = AppLanguage.norwegian.rawValue
+    @State private var showingClearHistoryConfirmation = false
 
     var body: some View {
         NavigationStack {
@@ -34,6 +36,7 @@ struct HistoryView: View {
                             }
                             .buttonStyle(.plain)
                         }
+                        .onDelete(perform: deleteProducts)
                     }
                 }
             }
@@ -47,11 +50,50 @@ struct HistoryView: View {
                 }
             }
             .navigationTitle(AppText.text(.history, language: language))
+            .toolbar {
+                if !products.isEmpty {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(AppText.text(.clearHistory, language: language), role: .destructive) {
+                            showingClearHistoryConfirmation = true
+                        }
+                    }
+                }
+            }
+            .alert(
+                AppText.text(.clearHistoryTitle, language: language),
+                isPresented: $showingClearHistoryConfirmation
+            ) {
+                Button(AppText.text(.clearHistoryConfirm, language: language), role: .destructive) {
+                    clearHistory()
+                }
+
+                Button(AppText.text(.cancel, language: language), role: .cancel) {}
+            } message: {
+                Text(AppText.text(.clearHistoryMessage, language: language))
+            }
         }
     }
 
     private var language: AppLanguage {
         AppLanguage(rawValue: selectedLanguage) ?? .norwegian
+    }
+
+    @MainActor
+    private func deleteProducts(at offsets: IndexSet) {
+        for index in offsets {
+            modelContext.delete(products[index])
+        }
+
+        try? modelContext.save()
+    }
+
+    @MainActor
+    private func clearHistory() {
+        for product in products {
+            modelContext.delete(product)
+        }
+
+        try? modelContext.save()
     }
 }
 

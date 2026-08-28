@@ -45,6 +45,8 @@ enum AppTextKey {
     case scanProduct
     case loadingProductInformation
     case fetchProductFailed
+    case retry
+    case scanAgain
     case recentlyScanned
     case positionBarcode
     case close
@@ -62,12 +64,18 @@ enum AppTextKey {
     case historySummaryTitle
     case historySummaryBody
     case savedScansCount
+    case clearHistory
+    case clearHistoryTitle
+    case clearHistoryMessage
+    case clearHistoryConfirm
+    case cancel
     case product
     case assessment
     case profileMatches
     case betterAlternatives
     case lookingForAlternatives
     case alternativeFetchFailed
+    case alternativeRetry
     case productOverviewTitle
     case scannedBarcode
     case importantToCheck
@@ -91,6 +99,18 @@ enum AppTextKey {
     case profile
     case language
     case languageDescription
+    case help
+    case helpDescription
+    case safetyNoticeTitle
+    case safetyNoticeHeadline
+    case safetyNoticeSummary
+    case safetyNoticeWhatItDoes
+    case safetyNoticeWhatItDoesBody
+    case safetyNoticeWhatItCannotDo
+    case safetyNoticeWhatItCannotDoBody
+    case safetyNoticeAlwaysCheck
+    case safetyNoticeAlwaysCheckBody
+    case safetyNoticeContinue
     case allergySelectionDescription
     case profileName
     case profileNameDescription
@@ -140,6 +160,9 @@ enum AppTextKey {
     case dataQualityLimitedDetail
     case dataQualityUnknown
     case dataQualityUnknownDetail
+    case productDataConfidence
+    case productDataUpdated
+    case productDataUpdatedUnavailable
     case alternativeNeedsProfile
     case alternativeOnlyForConflicts
     case alternativeMissingCategoryData
@@ -176,6 +199,8 @@ enum AppText {
         case .scanProduct: "SKANN PRODUKT"
         case .loadingProductInformation: "Henter produktinformasjon …"
         case .fetchProductFailed: "Kunne ikke hente produkt"
+        case .retry: "Prøv igjen"
+        case .scanAgain: "Skann på nytt"
         case .recentlyScanned: "Nylig skannet"
         case .positionBarcode: "Plasser strekkoden i kameraet"
         case .close: "Lukk"
@@ -193,12 +218,18 @@ enum AppText {
         case .historySummaryTitle: "Tidligere skanninger"
         case .historySummaryBody: "Åpne et produkt på nytt for å se vurderingen og eventuelle bedre alternativer."
         case .savedScansCount: "lagrede skanninger"
+        case .clearHistory: "Tøm historikk"
+        case .clearHistoryTitle: "Tømme historikk?"
+        case .clearHistoryMessage: "Alle lagrede skanninger blir fjernet fra denne enheten."
+        case .clearHistoryConfirm: "Tøm"
+        case .cancel: "Avbryt"
         case .product: "Produkt"
         case .assessment: "Vurdering"
         case .profileMatches: "Treff mot profilen din"
         case .betterAlternatives: "Bedre alternativer"
         case .lookingForAlternatives: "Leter etter produkter i samme kategori …"
         case .alternativeFetchFailed: "Kunne ikke hente alternative produkter akkurat nå."
+        case .alternativeRetry: "Prøv å hente alternativer igjen"
         case .productOverviewTitle: "Skannet produkt"
         case .scannedBarcode: "Strekkode"
         case .importantToCheck: "Viktig å kontrollere"
@@ -222,6 +253,18 @@ enum AppText {
         case .profile: "Profil"
         case .language: "Språk"
         case .languageDescription: "Velg hvilket språk Ingredia skal bruke i appen og restaurantkortet."
+        case .help: "Hjelp"
+        case .helpDescription: "Les en kort veiledning om skanning, vurderinger, alternativer og datagrunnlag."
+        case .safetyNoticeTitle: "Viktig informasjon"
+        case .safetyNoticeHeadline: "Bruk Ingredia som støtte, ikke som fasit."
+        case .safetyNoticeSummary: "Ingredia hjelper deg med å finne relevant produktinformasjon raskere, men appen kan ikke garantere at en matvare er trygg."
+        case .safetyNoticeWhatItDoes: "Hva appen gjør"
+        case .safetyNoticeWhatItDoesBody: "Ingredia skanner strekkoder, henter tilgjengelige produktdata og sammenligner disse med allergiprofilen din."
+        case .safetyNoticeWhatItCannotDo: "Hva appen ikke kan gjøre"
+        case .safetyNoticeWhatItCannotDoBody: "Ingredia kan ikke bekrefte medisinsk trygghet. Produktdata kan være mangelfulle, utdaterte eller feil registrert."
+        case .safetyNoticeAlwaysCheck: "Hva du alltid må kontrollere"
+        case .safetyNoticeAlwaysCheckBody: "Les alltid emballasjen, ingredienslisten, allergenmerkingen, sporadvarsler og produsentens siste informasjon før du spiser produktet."
+        case .safetyNoticeContinue: "Jeg forstår"
         case .allergySelectionDescription: "Velg allergenene og intoleransene som skal brukes i vurderingene dine."
         case .profileName: "Profilnavn"
         case .profileNameDescription: "Gi profilen et tydelig navn, for eksempel deg selv eller et familiemedlem."
@@ -271,6 +314,9 @@ enum AppText {
         case .dataQualityLimitedDetail: "Noen relevante felt mangler eller er ufullstendige."
         case .dataQualityUnknown: "Ukjent datagrunnlag"
         case .dataQualityUnknownDetail: "Det finnes ikke nok data til en meningsfull vurdering."
+        case .productDataConfidence: "Datagrunnlag"
+        case .productDataUpdated: "Sist oppdatert"
+        case .productDataUpdatedUnavailable: "Siste oppdatering er ikke tilgjengelig."
         case .alternativeNeedsProfile: "Opprett en profil for å få forslag som vurderes mot allergiene dine."
         case .alternativeOnlyForConflicts: "Bedre alternativer vises når produktet har en konflikt eller bør kontrolleres."
         case .alternativeMissingCategoryData: "Produktet mangler kategoridata, så Ingredia kan ikke finne lignende produkter ennå."
@@ -296,6 +342,8 @@ enum AppText {
         case .scanProduct: "SCAN PRODUCT"
         case .loadingProductInformation: "Fetching product information …"
         case .fetchProductFailed: "Could not fetch product"
+        case .retry: "Try Again"
+        case .scanAgain: "Scan Again"
         case .recentlyScanned: "Recently scanned"
         case .positionBarcode: "Place the barcode inside the camera frame"
         case .close: "Close"
@@ -313,12 +361,18 @@ enum AppText {
         case .historySummaryTitle: "Previous scans"
         case .historySummaryBody: "Open a product again to review the assessment and any better alternatives."
         case .savedScansCount: "saved scans"
+        case .clearHistory: "Clear History"
+        case .clearHistoryTitle: "Clear history?"
+        case .clearHistoryMessage: "All saved scans will be removed from this device."
+        case .clearHistoryConfirm: "Clear"
+        case .cancel: "Cancel"
         case .product: "Product"
         case .assessment: "Assessment"
         case .profileMatches: "Matches against your profile"
         case .betterAlternatives: "Better alternatives"
         case .lookingForAlternatives: "Looking for products in the same category …"
         case .alternativeFetchFailed: "Could not fetch alternative products right now."
+        case .alternativeRetry: "Try loading alternatives again"
         case .productOverviewTitle: "Scanned product"
         case .scannedBarcode: "Barcode"
         case .importantToCheck: "Important to check"
@@ -342,6 +396,18 @@ enum AppText {
         case .profile: "Profile"
         case .language: "Language"
         case .languageDescription: "Choose which language Ingredia should use in the app and restaurant card."
+        case .help: "Help"
+        case .helpDescription: "Read a short guide about scanning, assessments, alternatives, and data confidence."
+        case .safetyNoticeTitle: "Important Information"
+        case .safetyNoticeHeadline: "Use Ingredia as support, not as a guarantee."
+        case .safetyNoticeSummary: "Ingredia helps you find relevant product information faster, but the app cannot guarantee that a food product is safe."
+        case .safetyNoticeWhatItDoes: "What the app does"
+        case .safetyNoticeWhatItDoesBody: "Ingredia scans barcodes, fetches available product data, and compares that data with your allergy profile."
+        case .safetyNoticeWhatItCannotDo: "What the app cannot do"
+        case .safetyNoticeWhatItCannotDoBody: "Ingredia cannot confirm medical safety. Product data may be incomplete, outdated, or incorrect."
+        case .safetyNoticeAlwaysCheck: "What you must always check"
+        case .safetyNoticeAlwaysCheckBody: "Always read the packaging, ingredient list, allergen labeling, trace warnings, and the manufacturer’s latest information before eating the product."
+        case .safetyNoticeContinue: "I Understand"
         case .allergySelectionDescription: "Choose the allergens and intolerances that should be used in your assessments."
         case .profileName: "Profile name"
         case .profileNameDescription: "Give the profile a clear name, such as yourself or a family member."
@@ -391,6 +457,9 @@ enum AppText {
         case .dataQualityLimitedDetail: "Some relevant fields are missing or incomplete."
         case .dataQualityUnknown: "Unknown data basis"
         case .dataQualityUnknownDetail: "There is not enough data for a meaningful assessment."
+        case .productDataConfidence: "Data confidence"
+        case .productDataUpdated: "Last updated"
+        case .productDataUpdatedUnavailable: "The latest update is not available."
         case .alternativeNeedsProfile: "Create a profile to get suggestions evaluated against your allergens."
         case .alternativeOnlyForConflicts: "Better alternatives appear when the product has a conflict or should be checked."
         case .alternativeMissingCategoryData: "The product lacks category data, so Ingredia cannot find similar products yet."
@@ -416,6 +485,8 @@ enum AppText {
         case .scanProduct: "สแกนสินค้า"
         case .loadingProductInformation: "กำลังดึงข้อมูลสินค้า …"
         case .fetchProductFailed: "ไม่สามารถดึงข้อมูลสินค้าได้"
+        case .retry: "ลองอีกครั้ง"
+        case .scanAgain: "สแกนอีกครั้ง"
         case .recentlyScanned: "สแกนล่าสุด"
         case .positionBarcode: "วางบาร์โค้ดให้อยู่ในกรอบกล้อง"
         case .close: "ปิด"
@@ -433,12 +504,18 @@ enum AppText {
         case .historySummaryTitle: "การสแกนก่อนหน้า"
         case .historySummaryBody: "เปิดสินค้าอีกครั้งเพื่อดูผลการประเมินและทางเลือกที่ดีกว่าหากมี"
         case .savedScansCount: "รายการสแกนที่บันทึกไว้"
+        case .clearHistory: "ล้างประวัติ"
+        case .clearHistoryTitle: "ล้างประวัติ?"
+        case .clearHistoryMessage: "รายการสแกนที่บันทึกไว้ทั้งหมดจะถูกลบออกจากอุปกรณ์นี้"
+        case .clearHistoryConfirm: "ล้าง"
+        case .cancel: "ยกเลิก"
         case .product: "สินค้า"
         case .assessment: "การประเมิน"
         case .profileMatches: "รายการที่ตรงกับโปรไฟล์ของคุณ"
         case .betterAlternatives: "ทางเลือกที่ดีกว่า"
         case .lookingForAlternatives: "กำลังค้นหาสินค้าในหมวดเดียวกัน …"
         case .alternativeFetchFailed: "ไม่สามารถดึงสินค้าทางเลือกได้ในขณะนี้"
+        case .alternativeRetry: "ลองดึงสินค้าทางเลือกอีกครั้ง"
         case .productOverviewTitle: "สินค้าที่สแกน"
         case .scannedBarcode: "บาร์โค้ด"
         case .importantToCheck: "สิ่งสำคัญที่ต้องตรวจสอบ"
@@ -462,6 +539,18 @@ enum AppText {
         case .profile: "โปรไฟล์"
         case .language: "ภาษา"
         case .languageDescription: "เลือกภาษาที่ Ingredia ควรใช้ในแอปและบัตรร้านอาหาร"
+        case .help: "ช่วยเหลือ"
+        case .helpDescription: "อ่านคู่มือสั้น ๆ เกี่ยวกับการสแกน การประเมิน ทางเลือก และความน่าเชื่อถือของข้อมูล"
+        case .safetyNoticeTitle: "ข้อมูลสำคัญ"
+        case .safetyNoticeHeadline: "ใช้ Ingredia เป็นตัวช่วย ไม่ใช่ข้อยืนยัน"
+        case .safetyNoticeSummary: "Ingredia ช่วยให้คุณค้นหาข้อมูลสินค้าที่เกี่ยวข้องได้เร็วขึ้น แต่แอปไม่สามารถรับประกันได้ว่าอาหารนั้นปลอดภัย"
+        case .safetyNoticeWhatItDoes: "แอปทำอะไร"
+        case .safetyNoticeWhatItDoesBody: "Ingredia สแกนบาร์โค้ด ดึงข้อมูลสินค้าที่มีอยู่ และเปรียบเทียบข้อมูลนั้นกับโปรไฟล์การแพ้อาหารของคุณ"
+        case .safetyNoticeWhatItCannotDo: "แอปทำอะไรไม่ได้"
+        case .safetyNoticeWhatItCannotDoBody: "Ingredia ไม่สามารถยืนยันความปลอดภัยทางการแพทย์ได้ ข้อมูลสินค้าอาจไม่ครบ ล้าสมัย หรือไม่ถูกต้อง"
+        case .safetyNoticeAlwaysCheck: "สิ่งที่ต้องตรวจสอบทุกครั้ง"
+        case .safetyNoticeAlwaysCheckBody: "ควรอ่านบรรจุภัณฑ์ รายการส่วนผสม การระบุสารก่อภูมิแพ้ คำเตือนเรื่องร่องรอย และข้อมูลล่าสุดจากผู้ผลิตก่อนรับประทานทุกครั้ง"
+        case .safetyNoticeContinue: "ฉันเข้าใจ"
         case .allergySelectionDescription: "เลือกสารก่อภูมิแพ้และภาวะแพ้ที่ควรใช้ในการประเมินของคุณ"
         case .profileName: "ชื่อโปรไฟล์"
         case .profileNameDescription: "ตั้งชื่อโปรไฟล์ให้ชัดเจน เช่น ชื่อตัวคุณเองหรือสมาชิกในครอบครัว"
@@ -511,6 +600,9 @@ enum AppText {
         case .dataQualityLimitedDetail: "ข้อมูลสำคัญบางส่วนขาดหายหรือไม่ครบถ้วน"
         case .dataQualityUnknown: "ฐานข้อมูลไม่ชัดเจน"
         case .dataQualityUnknownDetail: "มีข้อมูลไม่เพียงพอสำหรับการประเมินที่มีความหมาย"
+        case .productDataConfidence: "ความน่าเชื่อถือของข้อมูล"
+        case .productDataUpdated: "อัปเดตล่าสุด"
+        case .productDataUpdatedUnavailable: "ไม่มีข้อมูลเวลาอัปเดตล่าสุด"
         case .alternativeNeedsProfile: "สร้างโปรไฟล์เพื่อรับคำแนะนำที่ประเมินตามสารก่อภูมิแพ้ของคุณ"
         case .alternativeOnlyForConflicts: "ทางเลือกที่ดีกว่าจะแสดงเมื่อสินค้ามีความขัดแย้งหรือต้องตรวจสอบ"
         case .alternativeMissingCategoryData: "สินค้านี้ไม่มีข้อมูลหมวดหมู่ ดังนั้น Ingredia จึงยังหาสินค้าที่คล้ายกันไม่ได้"

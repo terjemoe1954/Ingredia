@@ -2,15 +2,20 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
+    private static let hasSeenSafetyNoticeStorageKey = "hasSeenSafetyNotice"
+
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \UserProfile.createdAt) private var profiles: [UserProfile]
     @Query(sort: \ScannedProduct.lastScanned, order: .reverse) private var products: [ScannedProduct]
     @AppStorage(AppLanguage.storageKey) private var selectedLanguage = AppLanguage.norwegian.rawValue
+    @AppStorage(Self.hasSeenSafetyNoticeStorageKey) private var hasSeenSafetyNotice = false
 
     @State private var showingScanner = false
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var selectedProduct: ScannedProduct?
+    @State private var showingSafetyNotice = false
+    @State private var lastScannedCode: String?
 
     private var profile: UserProfile? { UserProfile.activeProfile(from: profiles) }
 
@@ -26,12 +31,25 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
 
-                    if let errorMessage {
-                        ContentUnavailableView(
-                            AppText.text(.fetchProductFailed, language: language),
-                            systemImage: "exclamationmark.triangle",
-                            description: Text(errorMessage)
-                        )
+                    if let fetchErrorMessage = errorMessage {
+                        ContentUnavailableView {
+                            Label(AppText.text(.fetchProductFailed, language: language), systemImage: "exclamationmark.triangle")
+                        } description: {
+                            Text(fetchErrorMessage)
+                        } actions: {
+                            if let lastScannedCode {
+                                Button(AppText.text(.retry, language: language)) {
+                                    Task {
+                                        await lookup(code: lastScannedCode)
+                                    }
+                                }
+                            }
+
+                            Button(AppText.text(.scanAgain, language: language)) {
+                                errorMessage = nil
+                                showingScanner = true
+                            }
+                        }
                     }
 
                     if !products.isEmpty {
@@ -84,8 +102,16 @@ struct HomeView: View {
             .sheet(item: $selectedProduct) { product in
                 ProductResultView(product: product, profile: profile)
             }
+            .sheet(isPresented: $showingSafetyNotice) {
+                SafetyNoticeView(language: language) {
+                    hasSeenSafetyNotice = true
+                    showingSafetyNotice = false
+                }
+                .interactiveDismissDisabled()
+            }
             .task {
                 createDefaultProfileIfNeeded()
+                presentSafetyNoticeIfNeeded()
             }
         }
     }
@@ -224,9 +250,16 @@ struct HomeView: View {
     }
 
     @MainActor
+    private func presentSafetyNoticeIfNeeded() {
+        guard !hasSeenSafetyNotice else { return }
+        showingSafetyNotice = true
+    }
+
+    @MainActor
     private func lookup(code: String) async {
         isLoading = true
         errorMessage = nil
+        lastScannedCode = code
 
         do {
             let fetched = try await OpenFoodFactsService.shared.fetchProduct(barcode: code)

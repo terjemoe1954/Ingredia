@@ -1,0 +1,264 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 1686 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(INGREDIA PRIVACY POLICY) Tj
+T*
+() Tj
+T*
+(Last updated: August 28, 2026) Tj
+T*
+() Tj
+T*
+(OVERVIEW) Tj
+T*
+() Tj
+T*
+(Ingredia is an iPhone app that helps users review packaged food products against a ) Tj
+T*
+(personal allergy or intolerance profile.) Tj
+T*
+() Tj
+T*
+(This privacy policy describes what information the app uses, where that information is ) Tj
+T*
+(stored, and when data is sent to external services.) Tj
+T*
+() Tj
+T*
+(INFORMATION STORED ON DEVICE) Tj
+T*
+() Tj
+T*
+(Ingredia stores the following information locally on the user’s device:) Tj
+T*
+() Tj
+T*
+(• allergy and intolerance selections) Tj
+T*
+(• profile name) Tj
+T*
+(• cross-contamination preference) Tj
+T*
+(• optional restaurant note) Tj
+T*
+(• selected app language) Tj
+T*
+(• scanned product history) Tj
+T*
+(• product records saved after scan or review) Tj
+T*
+() Tj
+T*
+(This information is used to personalize product assessments and keep previously viewed ) Tj
+T*
+(products available in the app.) Tj
+T*
+() Tj
+T*
+(CAMERA ACCESS) Tj
+T*
+() Tj
+T*
+(Ingredia requests camera access only to scan product barcodes.) Tj
+T*
+() Tj
+T*
+(The app does not use the camera to record video for upload or background monitoring.) Tj
+T*
+() Tj
+T*
+(NETWORK REQUESTS) Tj
+T*
+() Tj
+T*
+(When a user scans a barcode, Ingredia sends the barcode to Open Food Facts to retrieve ) Tj
+T*
+(product information.) Tj
+T*
+() Tj
+T*
+(Ingredia may also send product category information in requests to search for ) Tj
+T*
+(alternative items in similar categories.) Tj
+T*
+() Tj
+T*
+(These requests are used only to:) Tj
+T*
+() Tj
+T*
+(• fetch product records) Tj
+T*
+(• look for similar products) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 1809 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(• update the displayed assessment) Tj
+T*
+() Tj
+T*
+(EXTERNAL DATA SOURCE) Tj
+T*
+() Tj
+T*
+(Ingredia currently uses Open Food Facts as an external product data source.) Tj
+T*
+() Tj
+T*
+(Open Food Facts is a third-party public database. Product information returned by that ) Tj
+T*
+(service can be incomplete, outdated, or incorrect.) Tj
+T*
+() Tj
+T*
+(Users should always verify the product packaging and the manufacturer’s latest ) Tj
+T*
+(information.) Tj
+T*
+() Tj
+T*
+(PERSONAL DATA SHARING) Tj
+T*
+() Tj
+T*
+(Ingredia does not intentionally send the user’s full allergy profile, restaurant note, ) Tj
+T*
+(or scan history to Open Food Facts as named profile records.) Tj
+T*
+() Tj
+T*
+(However, the app uses the profile locally to evaluate fetched product data and to rank ) Tj
+T*
+(alternative suggestions on device.) Tj
+T*
+() Tj
+T*
+(ANALYTICS AND TRACKING) Tj
+T*
+() Tj
+T*
+(The current version of Ingredia does not include:) Tj
+T*
+() Tj
+T*
+(• advertising SDKs) Tj
+T*
+(• third-party analytics SDKs) Tj
+T*
+(• cross-app tracking) Tj
+T*
+() Tj
+T*
+(If analytics, crash reporting, or account features are added later, this policy should ) Tj
+T*
+(be updated before release of those changes.) Tj
+T*
+() Tj
+T*
+(DATA RETENTION) Tj
+T*
+() Tj
+T*
+(Local data remains on the device until the user deletes the app or clears that data ) Tj
+T*
+(through future app controls.) Tj
+T*
+() Tj
+T*
+(At the current stage, scan history and saved product records remain available locally ) Tj
+T*
+(for reuse inside the app.) Tj
+T*
+() Tj
+T*
+(CHILDREN) Tj
+T*
+() Tj
+T*
+(Ingredia is not designed specifically for children under a defined age threshold, and it) Tj
+T*
+( does not knowingly collect personal information from children through account creation.) Tj
+T*
+() Tj
+T*
+(SAFETY LIMITATION) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 333 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+() Tj
+T*
+(Ingredia is a decision-support tool. It does not guarantee that a product is medically ) Tj
+T*
+(safe for any individual.) Tj
+T*
+() Tj
+T*
+(CONTACT) Tj
+T*
+() Tj
+T*
+(Before App Store release, replace this section with your real public support contact and) Tj
+T*
+( support URL.) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R] /Count 3 >>
+endobj
+10 0 obj
+<< /Type /Catalog /Pages 9 0 R >>
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000001898 00000 n 
+0000002034 00000 n 
+0000003895 00000 n 
+0000004031 00000 n 
+0000004415 00000 n 
+0000004551 00000 n 
+0000004620 00000 n 
+trailer
+<< /Size 11 /Root 10 0 R >>
+startxref
+4670
+%%EOF

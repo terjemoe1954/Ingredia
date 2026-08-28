@@ -226,7 +226,7 @@ enum AlternativeRankingService {
         }
     }
 
-    static func assessment(for product: ScannedProduct, profile: UserProfile) -> ProductSafetyAssessment {
+    static func assessment(for product: ScannedProduct, profile: UserProfile?) -> ProductSafetyAssessment {
         let safetyResult = SafetyAnalyzer.analyze(product: product, profile: profile)
 
         let hasIngredients = !product.ingredientsText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty

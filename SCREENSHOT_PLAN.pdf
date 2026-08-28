@@ -1,0 +1,370 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 1504 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(INGREDIA SCREENSHOT PLAN) Tj
+T*
+() Tj
+T*
+(Last updated: August 28, 2026) Tj
+T*
+() Tj
+T*
+(GOAL) Tj
+T*
+() Tj
+T*
+(Create App Store screenshots that show what Ingredia actually does without implying ) Tj
+T*
+(guaranteed safety.) Tj
+T*
+() Tj
+T*
+(VISUAL PRINCIPLES) Tj
+T*
+() Tj
+T*
+(• Show clear product results, not vague marketing claims) Tj
+T*
+(• Avoid wording that suggests medical certainty) Tj
+T*
+(• Prefer realistic example products and realistic profile settings) Tj
+T*
+(• Keep text large and readable) Tj
+T*
+(• Use screenshots that show the scan flow, result explanation, and restaurant card) Tj
+T*
+() Tj
+T*
+(SUGGESTED SCREENSHOT SET) Tj
+T*
+() Tj
+T*
+(1. HOME / SCAN ENTRY) Tj
+T*
+() Tj
+T*
+(Purpose:) Tj
+T*
+(Show that the app is centered on fast scanning with a profile-aware workflow.) Tj
+T*
+() Tj
+T*
+(Suggested caption:) Tj
+T*
+(`Scan food products against your allergy profile`) Tj
+T*
+() Tj
+T*
+(Suggested screen:) Tj
+T*
+(• Home tab) Tj
+T*
+(• active profile visible) Tj
+T*
+(• main scan call-to-action visible) Tj
+T*
+() Tj
+T*
+(2. PRODUCT ASSESSMENT RESULT) Tj
+T*
+() Tj
+T*
+(Purpose:) Tj
+T*
+(Show the main result state and explanation of a conflict.) Tj
+T*
+() Tj
+T*
+(Suggested caption:) Tj
+T*
+(`See possible conflicts and what needs checking`) Tj
+T*
+() Tj
+T*
+(Suggested screen:) Tj
+T*
+(• Product result with `Not recommended` or `Check the product`) Tj
+T*
+(• findings section visible) Tj
+T*
+(• data confidence section visible) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 1313 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(3. BETTER ALTERNATIVES) Tj
+T*
+() Tj
+T*
+(Purpose:) Tj
+T*
+(Show that the app does more than warn and can suggest more compatible options.) Tj
+T*
+() Tj
+T*
+(Suggested caption:) Tj
+T*
+(`Review better alternatives in the same category`) Tj
+T*
+() Tj
+T*
+(Suggested screen:) Tj
+T*
+(• Product result with alternatives list expanded) Tj
+T*
+(• source labels and confidence visible) Tj
+T*
+() Tj
+T*
+(4. HISTORY) Tj
+T*
+() Tj
+T*
+(Purpose:) Tj
+T*
+(Show that scanned products remain available locally.) Tj
+T*
+() Tj
+T*
+(Suggested caption:) Tj
+T*
+(`Reopen saved scans anytime from history`) Tj
+T*
+() Tj
+T*
+(Suggested screen:) Tj
+T*
+(• History tab) Tj
+T*
+(• several saved products) Tj
+T*
+(• visible statuses) Tj
+T*
+() Tj
+T*
+(5. RESTAURANT CARD) Tj
+T*
+() Tj
+T*
+(Purpose:) Tj
+T*
+(Show the restaurant-use case clearly.) Tj
+T*
+() Tj
+T*
+(Suggested caption:) Tj
+T*
+(`Show your allergy card when ordering`) Tj
+T*
+() Tj
+T*
+(Suggested screen:) Tj
+T*
+(• Restaurant Card tab) Tj
+T*
+(• allergens visible) Tj
+T*
+(• cross-contamination warning enabled) Tj
+T*
+() Tj
+T*
+(6. PROFILE SETUP) Tj
+T*
+() Tj
+T*
+(Purpose:) Tj
+T*
+(Show that users can personalize the app for their needs.) Tj
+T*
+() Tj
+T*
+(Suggested caption:) Tj
+T*
+(`Choose allergens, languages, and trace-warning preferences`) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 1380 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+() Tj
+T*
+(Suggested screen:) Tj
+T*
+(• Profile tab) Tj
+T*
+(• selected allergens visible) Tj
+T*
+(• reject may contain toggle visible) Tj
+T*
+(• language picker visible) Tj
+T*
+() Tj
+T*
+(DEVICES TO PREPARE) Tj
+T*
+() Tj
+T*
+(Prepare at least:) Tj
+T*
+() Tj
+T*
+(• 6.7-inch iPhone screenshots) Tj
+T*
+(• 6.5-inch iPhone screenshots if needed by App Store Connect) Tj
+T*
+(• Optional smaller iPhone size if you want extra flexibility) Tj
+T*
+() Tj
+T*
+(CAPTURE PREPARATION) Tj
+T*
+() Tj
+T*
+(Before taking screenshots:) Tj
+T*
+() Tj
+T*
+(1. Create a clean demo profile.) Tj
+T*
+(2. Use realistic saved products in history.) Tj
+T*
+(3. Use one conflict example and one compatible alternative example.) Tj
+T*
+(4. Make sure timestamps and names look intentional.) Tj
+T*
+(5. Avoid placeholder or obviously broken data.) Tj
+T*
+() Tj
+T*
+(COPY TO AVOID) Tj
+T*
+() Tj
+T*
+(Do not use captions like:) Tj
+T*
+() Tj
+T*
+(• `Safe to eat`) Tj
+T*
+(• `Guaranteed safe`) Tj
+T*
+(• `Allergy-safe`) Tj
+T*
+(• `Trusted medical advice`) Tj
+T*
+() Tj
+T*
+(Prefer captions like:) Tj
+T*
+() Tj
+T*
+(• `Check products faster`) Tj
+T*
+(• `Review possible conflicts`) Tj
+T*
+(• `See what still needs verification`) Tj
+T*
+() Tj
+T*
+(RECOMMENDED DEMO DATA SET) Tj
+T*
+() Tj
+T*
+(Use screenshots based on:) Tj
+T*
+() Tj
+T*
+(• one profile with milk and peanut allergy) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 484 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(• one product with direct allergen conflict) Tj
+T*
+(• one product with trace warning only) Tj
+T*
+(• one result with clear better alternatives) Tj
+T*
+(• one history list with mixed statuses) Tj
+T*
+() Tj
+T*
+(OPERATIONAL NOTE) Tj
+T*
+() Tj
+T*
+(Take screenshots on the Simulator or device only after the final user-facing strings and) Tj
+T*
+( support information are settled, so the store assets do not drift from the shipped app.) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R] /Count 4 >>
+endobj
+12 0 obj
+<< /Type /Catalog /Pages 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000001716 00000 n 
+0000001853 00000 n 
+0000003218 00000 n 
+0000003355 00000 n 
+0000004787 00000 n 
+0000004924 00000 n 
+0000005459 00000 n 
+0000005597 00000 n 
+0000005674 00000 n 
+trailer
+<< /Size 13 /Root 12 0 R >>
+startxref
+5725
+%%EOF
