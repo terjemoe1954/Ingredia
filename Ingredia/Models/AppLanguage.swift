@@ -42,6 +42,7 @@ enum AppTextKey {
     case tabHistory
     case tabRestaurantCard
     case tabProfile
+    case settings
     case scanProduct
     case loadingProductInformation
     case fetchProductFailed
@@ -99,8 +100,18 @@ enum AppTextKey {
     case profile
     case language
     case languageDescription
+    case languageSupport
+    case appearance
+    case appearanceDescription
+    case appearanceSystem
+    case appearanceDark
+    case appearanceLight
     case help
     case helpDescription
+    case userGuide
+    case appInformation
+    case version
+    case build
     case safetyNoticeTitle
     case safetyNoticeHeadline
     case safetyNoticeSummary
@@ -196,6 +207,7 @@ enum AppText {
         case .tabHistory: "Historikk"
         case .tabRestaurantCard: "Restaurantkort"
         case .tabProfile: "Profil"
+        case .settings: "Innstillinger"
         case .scanProduct: "SKANN PRODUKT"
         case .loadingProductInformation: "Henter produktinformasjon …"
         case .fetchProductFailed: "Kunne ikke hente produkt"
@@ -253,8 +265,18 @@ enum AppText {
         case .profile: "Profil"
         case .language: "Språk"
         case .languageDescription: "Velg hvilket språk Ingredia skal bruke i appen og restaurantkortet."
+        case .languageSupport: "Engelsk, Norsk og Thai"
+        case .appearance: "Utseende"
+        case .appearanceDescription: "Velg om appen skal følge systemet eller bruke lyst eller mørkt utseende."
+        case .appearanceSystem: "System"
+        case .appearanceDark: "Mørk"
+        case .appearanceLight: "Lys"
         case .help: "Hjelp"
         case .helpDescription: "Les en kort veiledning om skanning, vurderinger, alternativer og datagrunnlag."
+        case .userGuide: "Brukerveiledning"
+        case .appInformation: "Appinformasjon"
+        case .version: "Versjon"
+        case .build: "Build"
         case .safetyNoticeTitle: "Viktig informasjon"
         case .safetyNoticeHeadline: "Bruk Ingredia som støtte, ikke som fasit."
         case .safetyNoticeSummary: "Ingredia hjelper deg med å finne relevant produktinformasjon raskere, men appen kan ikke garantere at en matvare er trygg."
@@ -339,6 +361,7 @@ enum AppText {
         case .tabHistory: "History"
         case .tabRestaurantCard: "Restaurant Card"
         case .tabProfile: "Profile"
+        case .settings: "Settings"
         case .scanProduct: "SCAN PRODUCT"
         case .loadingProductInformation: "Fetching product information …"
         case .fetchProductFailed: "Could not fetch product"
@@ -396,8 +419,18 @@ enum AppText {
         case .profile: "Profile"
         case .language: "Language"
         case .languageDescription: "Choose which language Ingredia should use in the app and restaurant card."
+        case .languageSupport: "English, Norwegian, and Thai"
+        case .appearance: "Appearance"
+        case .appearanceDescription: "Choose whether the app should follow the system appearance or use a light or dark theme."
+        case .appearanceSystem: "System"
+        case .appearanceDark: "Dark"
+        case .appearanceLight: "Light"
         case .help: "Help"
         case .helpDescription: "Read a short guide about scanning, assessments, alternatives, and data confidence."
+        case .userGuide: "User Guide"
+        case .appInformation: "App Information"
+        case .version: "Version"
+        case .build: "Build"
         case .safetyNoticeTitle: "Important Information"
         case .safetyNoticeHeadline: "Use Ingredia as support, not as a guarantee."
         case .safetyNoticeSummary: "Ingredia helps you find relevant product information faster, but the app cannot guarantee that a food product is safe."
@@ -482,6 +515,7 @@ enum AppText {
         case .tabHistory: "ประวัติ"
         case .tabRestaurantCard: "บัตรร้านอาหาร"
         case .tabProfile: "โปรไฟล์"
+        case .settings: "การตั้งค่า"
         case .scanProduct: "สแกนสินค้า"
         case .loadingProductInformation: "กำลังดึงข้อมูลสินค้า …"
         case .fetchProductFailed: "ไม่สามารถดึงข้อมูลสินค้าได้"
@@ -539,8 +573,18 @@ enum AppText {
         case .profile: "โปรไฟล์"
         case .language: "ภาษา"
         case .languageDescription: "เลือกภาษาที่ Ingredia ควรใช้ในแอปและบัตรร้านอาหาร"
+        case .languageSupport: "อังกฤษ นอร์เวย์ และไทย"
+        case .appearance: "ลักษณะการแสดงผล"
+        case .appearanceDescription: "เลือกให้แอปใช้ตามระบบ หรือใช้โหมดสว่างหรือมืด"
+        case .appearanceSystem: "ระบบ"
+        case .appearanceDark: "มืด"
+        case .appearanceLight: "สว่าง"
         case .help: "ช่วยเหลือ"
         case .helpDescription: "อ่านคู่มือสั้น ๆ เกี่ยวกับการสแกน การประเมิน ทางเลือก และความน่าเชื่อถือของข้อมูล"
+        case .userGuide: "คู่มือการใช้งาน"
+        case .appInformation: "ข้อมูลแอป"
+        case .version: "เวอร์ชัน"
+        case .build: "บิลด์"
         case .safetyNoticeTitle: "ข้อมูลสำคัญ"
         case .safetyNoticeHeadline: "ใช้ Ingredia เป็นตัวช่วย ไม่ใช่ข้อยืนยัน"
         case .safetyNoticeSummary: "Ingredia ช่วยให้คุณค้นหาข้อมูลสินค้าที่เกี่ยวข้องได้เร็วขึ้น แต่แอปไม่สามารถรับประกันได้ว่าอาหารนั้นปลอดภัย"

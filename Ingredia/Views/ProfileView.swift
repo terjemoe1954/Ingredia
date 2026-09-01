@@ -173,34 +173,6 @@ struct ProfileView: View {
                             .focused($focusedField, equals: .restaurantNote)
                         }
 
-                        Section(AppText.text(.language, language: language)) {
-                            Text(AppText.text(.languageDescription, language: language))
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                            Picker(AppText.text(.language, language: language), selection: $selectedLanguage) {
-                                ForEach(AppLanguage.allCases) { language in
-                                    Text(language.displayName)
-                                        .tag(language.rawValue)
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                        }
-
-                        Section(AppText.text(.help, language: language)) {
-                            NavigationLink {
-                                HelpView()
-                            } label: {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(AppText.text(.help, language: language))
-                                        .foregroundStyle(.primary)
-                                    Text(AppText.text(.helpDescription, language: language))
-                                        .font(.footnote)
-                                        .foregroundStyle(.secondary)
-                                }
-                                .padding(.vertical, 4)
-                            }
-                        }
-
                         Section {
                             Text(AppText.text(.profileDisclaimer, language: language))
                                 .font(.footnote)
@@ -217,6 +189,15 @@ struct ProfileView: View {
             }
             .navigationTitle(AppText.text(.profile, language: language))
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .accessibilityLabel(AppText.text(.settings, language: language))
+                }
+
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
 

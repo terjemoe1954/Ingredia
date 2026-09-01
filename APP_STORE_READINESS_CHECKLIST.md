@@ -1,6 +1,6 @@
 # Ingredia App Store Readiness Checklist
 
-Version scope: current project state as reviewed on August 28, 2026.
+Version scope: current project state as reviewed on August 30, 2026.
 
 ## Release Goal
 
@@ -39,6 +39,7 @@ Release bar:
 
 - Confirm the full core loop is complete:
 - profile setup
+- settings
 - scan
 - product assessment
 - explanation of findings
@@ -61,6 +62,7 @@ Release bar:
 
 - Test Dynamic Type across standard and large accessibility sizes.
 - Test VoiceOver on all tabs and result sections.
+- Test `SettingsView`, including appearance selection, language switching, help access, and version/build display.
 - Confirm status is not communicated by color alone.
 - Check contrast in caution, avoid, and data-quality states.
 - Verify button sizes and tap targets.
