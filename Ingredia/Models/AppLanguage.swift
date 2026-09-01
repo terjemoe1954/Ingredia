@@ -112,6 +112,13 @@ enum AppTextKey {
     case appInformation
     case version
     case build
+    case dataSources
+    case dataSourcesDescription
+    case dataSourceActive
+    case dataSourceInactive
+    case dataSourceAlternativeSearchAvailable
+    case dataSourceAlternativeSearchUnavailable
+    case foodRepoSetupInstructions
     case safetyNoticeTitle
     case safetyNoticeHeadline
     case safetyNoticeSummary
@@ -277,6 +284,13 @@ enum AppText {
         case .appInformation: "Appinformasjon"
         case .version: "Versjon"
         case .build: "Build"
+        case .dataSources: "Datakilder"
+        case .dataSourcesDescription: "Se hvilke kilder som er aktive for produktsøk og alternative varer."
+        case .dataSourceActive: "Aktiv"
+        case .dataSourceInactive: "Ikke aktiv"
+        case .dataSourceAlternativeSearchAvailable: "Brukes også for alternative varer"
+        case .dataSourceAlternativeSearchUnavailable: "Brukes bare for oppslag av enkeltprodukt"
+        case .foodRepoSetupInstructions: "For å slå på Food Repo, legg inn API-nøkkelen som `FOODREPO_API_KEY` i scheme environment eller Info.plist."
         case .safetyNoticeTitle: "Viktig informasjon"
         case .safetyNoticeHeadline: "Bruk Ingredia som støtte, ikke som fasit."
         case .safetyNoticeSummary: "Ingredia hjelper deg med å finne relevant produktinformasjon raskere, men appen kan ikke garantere at en matvare er trygg."
@@ -431,6 +445,13 @@ enum AppText {
         case .appInformation: "App Information"
         case .version: "Version"
         case .build: "Build"
+        case .dataSources: "Data Sources"
+        case .dataSourcesDescription: "See which sources are active for product lookup and alternative suggestions."
+        case .dataSourceActive: "Active"
+        case .dataSourceInactive: "Inactive"
+        case .dataSourceAlternativeSearchAvailable: "Also used for alternative products"
+        case .dataSourceAlternativeSearchUnavailable: "Used only for single-product lookup"
+        case .foodRepoSetupInstructions: "To enable Food Repo, add the API key as `FOODREPO_API_KEY` in the scheme environment or Info.plist."
         case .safetyNoticeTitle: "Important Information"
         case .safetyNoticeHeadline: "Use Ingredia as support, not as a guarantee."
         case .safetyNoticeSummary: "Ingredia helps you find relevant product information faster, but the app cannot guarantee that a food product is safe."
@@ -585,6 +606,13 @@ enum AppText {
         case .appInformation: "ข้อมูลแอป"
         case .version: "เวอร์ชัน"
         case .build: "บิลด์"
+        case .dataSources: "แหล่งข้อมูล"
+        case .dataSourcesDescription: "ดูว่าแหล่งข้อมูลใดกำลังใช้งานสำหรับการค้นหาสินค้าและสินค้าแนะนำ"
+        case .dataSourceActive: "เปิดใช้งาน"
+        case .dataSourceInactive: "ยังไม่เปิดใช้งาน"
+        case .dataSourceAlternativeSearchAvailable: "ใช้สำหรับค้นหาสินค้าทางเลือกด้วย"
+        case .dataSourceAlternativeSearchUnavailable: "ใช้เฉพาะการค้นหาสินค้าเดี่ยว"
+        case .foodRepoSetupInstructions: "หากต้องการเปิดใช้ Food Repo ให้เพิ่มคีย์ API เป็น `FOODREPO_API_KEY` ใน scheme environment หรือ Info.plist"
         case .safetyNoticeTitle: "ข้อมูลสำคัญ"
         case .safetyNoticeHeadline: "ใช้ Ingredia เป็นตัวช่วย ไม่ใช่ข้อยืนยัน"
         case .safetyNoticeSummary: "Ingredia ช่วยให้คุณค้นหาข้อมูลสินค้าที่เกี่ยวข้องได้เร็วขึ้น แต่แอปไม่สามารถรับประกันได้ว่าอาหารนั้นปลอดภัย"

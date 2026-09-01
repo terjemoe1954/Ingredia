@@ -67,10 +67,37 @@ enum ProductLookupError: LocalizedError {
 }
 
 @MainActor
-final class OpenFoodFactsService {
+final class OpenFoodFactsService: ProductDataProvider {
     static let shared = OpenFoodFactsService()
+    let providerID = "open_food_facts"
+    let displayName = "Open Food Facts"
+    let isEnabled = true
+    let supportsAlternativeSearch = true
 
     func fetchProduct(barcode: String) async throws -> ScannedProduct {
+        guard let record = try await fetchProductRecord(barcode: barcode) else {
+            throw ProductLookupError.productNotFound
+        }
+
+        return record.asScannedProduct()
+    }
+
+    func fetchAlternativeCandidates(
+        categoryNames: [String],
+        excludingBarcode barcode: String,
+        limitPerCategory: Int = 12,
+        maxResults: Int = 36
+    ) async throws -> [ScannedProduct] {
+        let records = try await fetchAlternativeCandidateRecords(
+            categoryNames: categoryNames,
+            excludingBarcode: barcode,
+            limitPerCategory: limitPerCategory,
+            maxResults: maxResults
+        )
+        return records.map { $0.asScannedProduct() }
+    }
+
+    func fetchProductRecord(barcode: String) async throws -> ProviderProductRecord? {
         let clean = barcode.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !clean.isEmpty,
               clean.allSatisfy({ $0.isNumber }) else {
@@ -94,15 +121,15 @@ final class OpenFoodFactsService {
             throw ProductLookupError.productNotFound
         }
 
-        return Self.makeProduct(from: product, fallbackBarcode: clean)
+        return Self.makeRecord(from: product, fallbackBarcode: clean, providerID: providerID)
     }
 
-    func fetchAlternativeCandidates(
+    func fetchAlternativeCandidateRecords(
         categoryNames: [String],
         excludingBarcode barcode: String,
-        limitPerCategory: Int = 12,
-        maxResults: Int = 36
-    ) async throws -> [ScannedProduct] {
+        limitPerCategory: Int,
+        maxResults: Int
+    ) async throws -> [ProviderProductRecord] {
         let cleanCategories = Array(
             NSOrderedSet(array: categoryNames.map {
                 $0.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -114,16 +141,27 @@ final class OpenFoodFactsService {
         }
 
         var seenBarcodes = Set<String>()
-        var results: [ScannedProduct] = []
+        var results: [ProviderProductRecord] = []
 
         for categoryName in cleanCategories {
-            let products = try await fetchAlternativeCandidatesPage(
+            let exactCategoryProducts = try await fetchAlternativeCandidatesPage(
                 categoryName: categoryName,
                 excludingBarcode: barcode,
                 limit: limitPerCategory
             )
 
-            for product in products {
+            let fallbackSearchProducts: [ProviderProductRecord]
+            if exactCategoryProducts.count < max(4, limitPerCategory / 2) {
+                fallbackSearchProducts = try await fetchAlternativeCandidatesBySearchTerm(
+                    categoryName,
+                    excludingBarcode: barcode,
+                    limit: limitPerCategory
+                )
+            } else {
+                fallbackSearchProducts = []
+            }
+
+            for product in exactCategoryProducts + fallbackSearchProducts {
                 guard seenBarcodes.insert(product.barcode).inserted else { continue }
                 results.append(product)
 
@@ -149,15 +187,46 @@ final class OpenFoodFactsService {
         categoryName: String,
         excludingBarcode barcode: String,
         limit: Int
-    ) async throws -> [ScannedProduct] {
+    ) async throws -> [ProviderProductRecord] {
+        try await fetchAlternativeCandidates(
+            queryItems: [
+                URLQueryItem(name: "categories_tags_en", value: categoryName),
+                URLQueryItem(name: "sort_by", value: "last_modified_t"),
+                URLQueryItem(name: "page_size", value: String(limit))
+            ],
+            excludingBarcode: barcode
+        )
+    }
+
+    private func fetchAlternativeCandidatesBySearchTerm(
+        _ categoryName: String,
+        excludingBarcode barcode: String,
+        limit: Int
+    ) async throws -> [ProviderProductRecord] {
+        let query = searchTerms(for: categoryName)
+        guard !query.isEmpty else {
+            return []
+        }
+
+        return try await fetchAlternativeCandidates(
+            queryItems: [
+                URLQueryItem(name: "search_terms", value: query),
+                URLQueryItem(name: "sort_by", value: "last_modified_t"),
+                URLQueryItem(name: "page_size", value: String(limit))
+            ],
+            excludingBarcode: barcode
+        )
+    }
+
+    private func fetchAlternativeCandidates(
+        queryItems: [URLQueryItem],
+        excludingBarcode barcode: String
+    ) async throws -> [ProviderProductRecord] {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "world.openfoodfacts.org"
         components.path = "/api/v2/search"
-        components.queryItems = [
-            URLQueryItem(name: "categories_tags_en", value: categoryName),
-            URLQueryItem(name: "sort_by", value: "last_modified_t"),
-            URLQueryItem(name: "page_size", value: String(limit)),
+        components.queryItems = queryItems + [
             URLQueryItem(
                 name: "fields",
                 value: "code,product_name,brands,ingredients_text,allergens_tags,traces_tags,categories_tags_en,image_front_small_url,last_modified_t"
@@ -167,8 +236,21 @@ final class OpenFoodFactsService {
         let decoded: OFFSearchResponse = try await Self.fetch(url: components.url)
         return decoded.products.compactMap { product in
             guard product.code != barcode else { return nil }
-            return Self.makeProduct(from: product)
+            return Self.makeRecord(from: product, providerID: providerID)
         }
+    }
+
+    private func searchTerms(for categoryName: String) -> String {
+        categoryName
+            .replacingOccurrences(of: "-", with: " ")
+            .split(separator: " ")
+            .map(String.init)
+            .filter { token in
+                let trimmed = token.trimmingCharacters(in: .whitespacesAndNewlines)
+                return trimmed.count > 2
+            }
+            .prefix(4)
+            .joined(separator: " ")
     }
 
     private static func fetch<Response: Decodable>(url: URL?) async throws -> Response {
@@ -201,8 +283,13 @@ final class OpenFoodFactsService {
         }
     }
 
-    private static func makeProduct(from product: OFFProduct, fallbackBarcode: String? = nil) -> ScannedProduct {
-        ScannedProduct(
+    private static func makeRecord(
+        from product: OFFProduct,
+        fallbackBarcode: String? = nil,
+        providerID: String
+    ) -> ProviderProductRecord {
+        ProviderProductRecord(
+            providerID: providerID,
             barcode: product.code ?? fallbackBarcode ?? UUID().uuidString,
             name: safeName(from: product.productName),
             brands: product.brands ?? "",

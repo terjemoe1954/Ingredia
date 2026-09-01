@@ -467,6 +467,249 @@ struct IngrediaTests {
         #expect(OpenFoodFactsService.mapHTTPStatus(429) == .badResponse)
     }
 
+    @Test
+    func productLookupAggregatorReturnsFirstAvailableProviderResult() async throws {
+        let expected = ProviderProductRecord(
+            providerID: "mock",
+            barcode: "12345678",
+            name: "Mock Product",
+            brands: "Mock Brand",
+            ingredientsText: "Sugar",
+            allergens: [],
+            traces: [],
+            categoryLabels: ["Snacks"],
+            imageURLString: nil,
+            lastModifiedAt: nil
+        )
+        let aggregator = ProductLookupAggregator(
+            providers: [
+                MockProductDataProvider(productRecord: nil),
+                MockProductDataProvider(productRecord: expected)
+            ]
+        )
+
+        let product = try await aggregator.fetchProduct(barcode: "12345678")
+
+        #expect(product.barcode == expected.barcode)
+        #expect(product.name == expected.name)
+        #expect(product.categoryLabels == expected.categoryLabels)
+    }
+
+    @Test
+    func productLookupAggregatorMergesDuplicateProductRecordsConservatively() async throws {
+        let first = ProviderProductRecord(
+            providerID: "first",
+            barcode: "12345678",
+            name: "Chocolate Bar",
+            brands: "",
+            ingredientsText: "Sugar, cocoa mass",
+            allergens: ["milk"],
+            traces: [],
+            categoryLabels: ["Chocolate bars"],
+            imageURLString: nil,
+            lastModifiedAt: Date(timeIntervalSince1970: 100)
+        )
+        let second = ProviderProductRecord(
+            providerID: "second",
+            barcode: "12345678",
+            name: "Chocolate Bar",
+            brands: "Brand Name",
+            ingredientsText: "Sugar, cocoa mass, cocoa butter",
+            allergens: [],
+            traces: ["nuts"],
+            categoryLabels: ["Snacks"],
+            imageURLString: "https://example.com/image.png",
+            lastModifiedAt: Date(timeIntervalSince1970: 200)
+        )
+        let aggregator = ProductLookupAggregator(
+            providers: [
+                MockProductDataProvider(productRecord: first),
+                MockProductDataProvider(productRecord: second)
+            ]
+        )
+
+        let product = try await aggregator.fetchProduct(barcode: "12345678")
+
+        #expect(product.name == "Chocolate Bar")
+        #expect(product.brands == "Brand Name")
+        #expect(product.ingredientsText == "Sugar, cocoa mass, cocoa butter")
+        #expect(product.allergens == ["milk"])
+        #expect(product.traces == ["nuts"])
+        #expect(product.categoryLabels == ["Chocolate bars", "Snacks"])
+        #expect(product.imageURLString == "https://example.com/image.png")
+        #expect(product.lastModifiedAt == Date(timeIntervalSince1970: 200))
+    }
+
+    @Test
+    func productLookupAggregatorMergesDuplicateAlternativeCandidatesByPreferredRecord() async throws {
+        let older = ProviderProductRecord(
+            providerID: "first",
+            barcode: "shared",
+            name: "Candidate",
+            brands: "Brand",
+            ingredientsText: "Cocoa mass, sugar",
+            allergens: [],
+            traces: [],
+            categoryLabels: ["Chocolate bars"],
+            imageURLString: nil,
+            lastModifiedAt: Date(timeIntervalSince1970: 100)
+        )
+        let richer = ProviderProductRecord(
+            providerID: "second",
+            barcode: "shared",
+            name: "Candidate",
+            brands: "Brand",
+            ingredientsText: "Cocoa mass, sugar",
+            allergens: ["soybeans"],
+            traces: [],
+            categoryLabels: ["Chocolate bars"],
+            imageURLString: nil,
+            lastModifiedAt: Date(timeIntervalSince1970: 200)
+        )
+        let unique = ProviderProductRecord(
+            providerID: "second",
+            barcode: "unique",
+            name: "Unique",
+            brands: "Brand",
+            ingredientsText: "Corn",
+            allergens: [],
+            traces: [],
+            categoryLabels: ["Chocolate bars"],
+            imageURLString: nil,
+            lastModifiedAt: nil
+        )
+        let aggregator = ProductLookupAggregator(
+            providers: [
+                MockProductDataProvider(alternativeRecords: [older]),
+                MockProductDataProvider(alternativeRecords: [richer, unique])
+            ]
+        )
+
+        let candidates = try await aggregator.fetchAlternativeCandidates(
+            categoryNames: ["Chocolate bars"],
+            excludingBarcode: "source"
+        )
+
+        #expect(candidates.count == 2)
+        #expect(candidates.first(where: { $0.barcode == "shared" })?.allergens == ["soybeans"])
+        #expect(candidates.contains(where: { $0.barcode == "unique" }))
+    }
+
+    @Test
+    func productLookupAggregatorMergesAlternativeCandidatesWithUnionOfWarnings() async throws {
+        let first = ProviderProductRecord(
+            providerID: "first",
+            barcode: "shared",
+            name: "Candidate",
+            brands: "",
+            ingredientsText: "Corn",
+            allergens: ["milk"],
+            traces: [],
+            categoryLabels: ["Snacks"],
+            imageURLString: nil,
+            lastModifiedAt: Date(timeIntervalSince1970: 100)
+        )
+        let second = ProviderProductRecord(
+            providerID: "second",
+            barcode: "shared",
+            name: "Candidate",
+            brands: "Brand",
+            ingredientsText: "Corn, salt",
+            allergens: [],
+            traces: ["peanuts"],
+            categoryLabels: ["Chips"],
+            imageURLString: nil,
+            lastModifiedAt: Date(timeIntervalSince1970: 150)
+        )
+        let aggregator = ProductLookupAggregator(
+            providers: [
+                MockProductDataProvider(alternativeRecords: [first]),
+                MockProductDataProvider(alternativeRecords: [second])
+            ]
+        )
+
+        let candidates = try await aggregator.fetchAlternativeCandidates(
+            categoryNames: ["Snacks"],
+            excludingBarcode: "source"
+        )
+
+        #expect(candidates.count == 1)
+        #expect(candidates.first?.ingredientsText == "Corn, salt")
+        #expect(candidates.first?.brands == "Brand")
+        #expect(candidates.first?.allergens == ["milk"])
+        #expect(candidates.first?.traces == ["peanuts"])
+        #expect(candidates.first?.categoryLabels == ["Snacks", "Chips"])
+    }
+
+    @Test
+    func foodRepoProductDecodesFromAttributesEnvelope() throws {
+        let data = Data(
+            """
+            {
+              "data": [
+                {
+                  "id": "1",
+                  "type": "products",
+                  "attributes": {
+                    "barcode": "7612345678901",
+                    "display_name_translations": {
+                      "en": "Test Product"
+                    },
+                    "ingredients_translations": {
+                      "en": "Sugar, cocoa mass"
+                    },
+                    "images": [
+                      {
+                        "medium": "https://example.com/image.jpg"
+                      }
+                    ],
+                    "updated_at": "2026-08-31T12:00:00.000Z"
+                  }
+                }
+              ]
+            }
+            """.utf8
+        )
+
+        let decoded = try JSONDecoder().decode(FoodRepoProductListResponse.self, from: data)
+
+        #expect(decoded.data.count == 1)
+        #expect(decoded.data.first?.barcode == "7612345678901")
+        #expect(decoded.data.first?.displayNameTranslations["en"] == "Test Product")
+        #expect(decoded.data.first?.ingredientsTranslations["en"] == "Sugar, cocoa mass")
+        #expect(decoded.data.first?.images.first?.medium == "https://example.com/image.jpg")
+    }
+
+    @Test
+    func foodRepoProductDecodesFromFlatProductShape() throws {
+        let data = Data(
+            """
+            {
+              "data": [
+                {
+                  "barcode": "7612345678901",
+                  "display_name_translations": {
+                    "en": "Flat Product"
+                  },
+                  "ingredients_translations": {
+                    "en": "Oats, salt"
+                  },
+                  "images": [],
+                  "updated_at": "2026-08-31T12:00:00.000Z"
+                }
+              ]
+            }
+            """.utf8
+        )
+
+        let decoded = try JSONDecoder().decode(FoodRepoProductListResponse.self, from: data)
+
+        #expect(decoded.data.count == 1)
+        #expect(decoded.data.first?.barcode == "7612345678901")
+        #expect(decoded.data.first?.displayNameTranslations["en"] == "Flat Product")
+        #expect(decoded.data.first?.ingredientsTranslations["en"] == "Oats, salt")
+    }
+
     private func makeProduct(
         barcode: String = UUID().uuidString,
         name: String = "Test Product",
@@ -490,5 +733,55 @@ struct IngrediaTests {
             lastModifiedAt: lastModifiedAt,
             lastScanned: lastScanned
         )
+    }
+}
+
+@MainActor
+private struct MockProductDataProvider: ProductDataProvider {
+    let providerID: String
+    let displayName: String
+    let isEnabled: Bool
+    let supportsAlternativeSearch: Bool
+    let productRecord: ProviderProductRecord?
+    let alternativeRecords: [ProviderProductRecord]
+    let error: Error?
+
+    init(
+        providerID: String = UUID().uuidString,
+        displayName: String = "Mock Provider",
+        isEnabled: Bool = true,
+        supportsAlternativeSearch: Bool = true,
+        productRecord: ProviderProductRecord? = nil,
+        alternativeRecords: [ProviderProductRecord] = [],
+        error: Error? = nil
+    ) {
+        self.providerID = providerID
+        self.displayName = displayName
+        self.isEnabled = isEnabled
+        self.supportsAlternativeSearch = supportsAlternativeSearch
+        self.productRecord = productRecord
+        self.alternativeRecords = alternativeRecords
+        self.error = error
+    }
+
+    func fetchProductRecord(barcode: String) async throws -> ProviderProductRecord? {
+        if let error {
+            throw error
+        }
+
+        return productRecord
+    }
+
+    func fetchAlternativeCandidateRecords(
+        categoryNames: [String],
+        excludingBarcode barcode: String,
+        limitPerCategory: Int,
+        maxResults: Int
+    ) async throws -> [ProviderProductRecord] {
+        if let error {
+            throw error
+        }
+
+        return Array(alternativeRecords.prefix(maxResults))
     }
 }

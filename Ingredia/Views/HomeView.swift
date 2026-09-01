@@ -262,7 +262,7 @@ struct HomeView: View {
         lastScannedCode = code
 
         do {
-            let fetched = try await OpenFoodFactsService.shared.fetchProduct(barcode: code)
+            let fetched = try await ProductLookupAggregator.shared.fetchProduct(barcode: code)
 
             let descriptor = FetchDescriptor<ScannedProduct>(
                 predicate: #Predicate { $0.barcode == code }

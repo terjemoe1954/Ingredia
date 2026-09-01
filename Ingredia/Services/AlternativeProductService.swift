@@ -90,7 +90,7 @@ final class AlternativeProductService {
             return .insufficientCategoryData
         }
 
-        let remoteCandidates = try await OpenFoodFactsService.shared.fetchAlternativeCandidates(
+        let remoteCandidates = try await ProductLookupAggregator.shared.fetchAlternativeCandidates(
             categoryNames: categoryNames,
             excludingBarcode: product.barcode
         )

@@ -53,6 +53,33 @@ struct SettingsView: View {
                 }
             }
 
+            Section(AppText.text(.dataSources, language: language)) {
+                Text(AppText.text(.dataSourcesDescription, language: language))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+
+                ForEach(sourceStatuses.filter(\.isEnabled)) { status in
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack {
+                            Text(status.name)
+                            Spacer()
+                            Text(AppText.text(.dataSourceActive, language: language))
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.green)
+                        }
+
+                        Text(
+                            status.supportsAlternativeSearch
+                            ? AppText.text(.dataSourceAlternativeSearchAvailable, language: language)
+                            : AppText.text(.dataSourceAlternativeSearchUnavailable, language: language)
+                        )
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+
             Section(AppText.text(.appInformation, language: language)) {
                 settingsValueRow(
                     title: AppText.text(.version, language: language),
@@ -70,6 +97,10 @@ struct SettingsView: View {
 
     private var language: AppLanguage {
         AppLanguage(rawValue: selectedLanguage) ?? .norwegian
+    }
+
+    private var sourceStatuses: [ProductDataSourceStatus] {
+        ProductLookupAggregator.sourceStatuses()
     }
 
     private func themeTitle(_ theme: AppTheme) -> String {
