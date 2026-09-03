@@ -179,6 +179,14 @@ enum AppTextKey {
     case dataQualityUnknown
     case dataQualityUnknownDetail
     case productDataConfidence
+    case sourceTrust
+    case sourceTrustCommunity
+    case sourceTrustCommunityDetail
+    case sourceTrustVerified
+    case sourceTrustVerifiedDetail
+    case sourceTrustLimited
+    case sourceTrustLimitedDetail
+    case dataSource
     case productDataUpdated
     case productDataUpdatedUnavailable
     case alternativeNeedsProfile
@@ -351,6 +359,14 @@ enum AppText {
         case .dataQualityUnknown: "Ukjent datagrunnlag"
         case .dataQualityUnknownDetail: "Det finnes ikke nok data til en meningsfull vurdering."
         case .productDataConfidence: "Datagrunnlag"
+        case .sourceTrust: "Kildetillit"
+        case .sourceTrustCommunity: "Fellesskapsdata"
+        case .sourceTrustCommunityDetail: "Dataene kommer fra åpne eller brukerdrevne kilder. De kan være nyttige, men må alltid kontrolleres mot emballasjen."
+        case .sourceTrustVerified: "Verifisert kilde"
+        case .sourceTrustVerifiedDetail: "Dataene kommer fra en mer kontrollert eller leverandørnær kilde, men emballasjen må fortsatt sjekkes."
+        case .sourceTrustLimited: "Begrenset kilde"
+        case .sourceTrustLimitedDetail: "Kilden kan hjelpe med produktidentifikasjon, men er ikke sterk nok for trygg allergivurdering alene."
+        case .dataSource: "Datakilde"
         case .productDataUpdated: "Sist oppdatert"
         case .productDataUpdatedUnavailable: "Siste oppdatering er ikke tilgjengelig."
         case .alternativeNeedsProfile: "Opprett en profil for å få forslag som vurderes mot allergiene dine."
@@ -512,6 +528,14 @@ enum AppText {
         case .dataQualityUnknown: "Unknown data basis"
         case .dataQualityUnknownDetail: "There is not enough data for a meaningful assessment."
         case .productDataConfidence: "Data confidence"
+        case .sourceTrust: "Source trust"
+        case .sourceTrustCommunity: "Community data"
+        case .sourceTrustCommunityDetail: "The data comes from open or community-driven sources. It can be useful, but it should always be checked against the packaging."
+        case .sourceTrustVerified: "Verified source"
+        case .sourceTrustVerifiedDetail: "The data comes from a more controlled or supplier-adjacent source, but the packaging must still be checked."
+        case .sourceTrustLimited: "Limited source"
+        case .sourceTrustLimitedDetail: "The source may help identify the product, but it is not strong enough for safe allergy assessment on its own."
+        case .dataSource: "Data source"
         case .productDataUpdated: "Last updated"
         case .productDataUpdatedUnavailable: "The latest update is not available."
         case .alternativeNeedsProfile: "Create a profile to get suggestions evaluated against your allergens."
@@ -673,6 +697,14 @@ enum AppText {
         case .dataQualityUnknown: "ฐานข้อมูลไม่ชัดเจน"
         case .dataQualityUnknownDetail: "มีข้อมูลไม่เพียงพอสำหรับการประเมินที่มีความหมาย"
         case .productDataConfidence: "ความน่าเชื่อถือของข้อมูล"
+        case .sourceTrust: "ความน่าเชื่อถือของแหล่งข้อมูล"
+        case .sourceTrustCommunity: "ข้อมูลจากชุมชน"
+        case .sourceTrustCommunityDetail: "ข้อมูลมาจากแหล่งเปิดหรือชุมชนผู้ใช้ ซึ่งมีประโยชน์ได้ แต่ต้องตรวจสอบกับฉลากสินค้าทุกครั้ง"
+        case .sourceTrustVerified: "แหล่งข้อมูลที่ตรวจสอบแล้ว"
+        case .sourceTrustVerifiedDetail: "ข้อมูลมาจากแหล่งที่มีการควบคุมมากขึ้นหรือใกล้ผู้ผลิตมากขึ้น แต่ยังต้องตรวจสอบบรรจุภัณฑ์ทุกครั้ง"
+        case .sourceTrustLimited: "แหล่งข้อมูลจำกัด"
+        case .sourceTrustLimitedDetail: "แหล่งข้อมูลนี้ช่วยระบุสินค้าได้ แต่ยังไม่เพียงพอสำหรับการประเมินอาการแพ้อย่างปลอดภัยเพียงลำพัง"
+        case .dataSource: "แหล่งข้อมูล"
         case .productDataUpdated: "อัปเดตล่าสุด"
         case .productDataUpdatedUnavailable: "ไม่มีข้อมูลเวลาอัปเดตล่าสุด"
         case .alternativeNeedsProfile: "สร้างโปรไฟล์เพื่อรับคำแนะนำที่ประเมินตามสารก่อภูมิแพ้ของคุณ"

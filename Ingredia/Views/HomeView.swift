@@ -269,6 +269,9 @@ struct HomeView: View {
             )
 
             if let existing = try? modelContext.fetch(descriptor).first {
+                existing.sourceProviderID = fetched.sourceProviderID
+                existing.sourceProviderName = fetched.sourceProviderName
+                existing.sourceTrustLevelRawValue = fetched.sourceTrustLevelRawValue
                 existing.name = fetched.name
                 existing.brands = fetched.brands
                 existing.ingredientsText = fetched.ingredientsText

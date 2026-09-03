@@ -28,6 +28,30 @@ enum ProductDataQuality {
     }
 }
 
+extension ProductSourceTrustLevel {
+    func title(language: AppLanguage = .current) -> String {
+        switch self {
+        case .community:
+            return AppText.text(.sourceTrustCommunity, language: language)
+        case .verified:
+            return AppText.text(.sourceTrustVerified, language: language)
+        case .limited:
+            return AppText.text(.sourceTrustLimited, language: language)
+        }
+    }
+
+    func detail(language: AppLanguage = .current) -> String {
+        switch self {
+        case .community:
+            return AppText.text(.sourceTrustCommunityDetail, language: language)
+        case .verified:
+            return AppText.text(.sourceTrustVerifiedDetail, language: language)
+        case .limited:
+            return AppText.text(.sourceTrustLimitedDetail, language: language)
+        }
+    }
+}
+
 struct ProductSafetyAssessment {
     let result: SafetyResult
     let dataQuality: ProductDataQuality

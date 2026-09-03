@@ -742,6 +742,7 @@ private struct MockProductDataProvider: ProductDataProvider {
     let displayName: String
     let isEnabled: Bool
     let supportsAlternativeSearch: Bool
+    let sourceTrustLevel: ProductSourceTrustLevel
     let productRecord: ProviderProductRecord?
     let alternativeRecords: [ProviderProductRecord]
     let error: Error?
@@ -751,6 +752,7 @@ private struct MockProductDataProvider: ProductDataProvider {
         displayName: String = "Mock Provider",
         isEnabled: Bool = true,
         supportsAlternativeSearch: Bool = true,
+        sourceTrustLevel: ProductSourceTrustLevel = .community,
         productRecord: ProviderProductRecord? = nil,
         alternativeRecords: [ProviderProductRecord] = [],
         error: Error? = nil
@@ -759,6 +761,7 @@ private struct MockProductDataProvider: ProductDataProvider {
         self.displayName = displayName
         self.isEnabled = isEnabled
         self.supportsAlternativeSearch = supportsAlternativeSearch
+        self.sourceTrustLevel = sourceTrustLevel
         self.productRecord = productRecord
         self.alternativeRecords = alternativeRecords
         self.error = error

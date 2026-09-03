@@ -74,6 +74,7 @@ final class FoodRepoService: ProductDataProvider {
     let providerID = "food_repo"
     let displayName = "Food Repo"
     let supportsAlternativeSearch = true
+    let sourceTrustLevel = ProductSourceTrustLevel.community
 
     var isConfigured: Bool {
         AppMetadata.hasFoodRepoAPIKey
@@ -261,6 +262,8 @@ final class FoodRepoService: ProductDataProvider {
 
         return ProviderProductRecord(
             providerID: providerID,
+            providerName: displayName,
+            sourceTrustLevel: sourceTrustLevel,
             barcode: normalizedBarcode,
             name: preferredLocalizedValue(from: product.displayNameTranslations) ?? AppText.text(.unknownProduct),
             brands: "",

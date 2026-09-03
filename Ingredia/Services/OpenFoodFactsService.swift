@@ -73,6 +73,7 @@ final class OpenFoodFactsService: ProductDataProvider {
     let displayName = "Open Food Facts"
     let isEnabled = true
     let supportsAlternativeSearch = true
+    let sourceTrustLevel = ProductSourceTrustLevel.community
 
     func fetchProduct(barcode: String) async throws -> ScannedProduct {
         guard let record = try await fetchProductRecord(barcode: barcode) else {
@@ -290,6 +291,8 @@ final class OpenFoodFactsService: ProductDataProvider {
     ) -> ProviderProductRecord {
         ProviderProductRecord(
             providerID: providerID,
+            providerName: OpenFoodFactsService.shared.displayName,
+            sourceTrustLevel: OpenFoodFactsService.shared.sourceTrustLevel,
             barcode: product.code ?? fallbackBarcode ?? UUID().uuidString,
             name: safeName(from: product.productName),
             brands: product.brands ?? "",

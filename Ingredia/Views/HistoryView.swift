@@ -129,6 +129,7 @@ private struct HistoryProductRow: View {
                 Text(result.level.title)
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(.secondary)
+                sourceTrustBadge
                 Text(product.lastScanned, format: .dateTime.day().month().hour().minute())
                     .font(.caption)
                     .foregroundStyle(.tertiary)
@@ -142,13 +143,37 @@ private struct HistoryProductRow: View {
             [
                 product.name,
                 product.brands,
-                "\(AppText.text(.accessibilityStatus)): \(result.level.title)",
+                "\(AppText.text(.accessibilityStatus, language: .current)): \(result.level.title)",
+                "\(AppText.text(.sourceTrust, language: .current)): \(product.sourceTrustLevel.title(language: .current))",
                 product.lastScanned.formatted(.dateTime.day().month().hour().minute())
             ]
             .filter { !$0.isEmpty }
             .joined(separator: ", ")
         )
         .accessibilityHint(AppText.text(.accessibilityOpensProduct))
+    }
+
+    private var sourceTrustBadge: some View {
+        Text(product.sourceTrustLevel.title(language: .current))
+            .font(.caption2.weight(.semibold))
+            .foregroundStyle(sourceTrustColor)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(sourceTrustColor.opacity(0.14))
+            )
+    }
+
+    private var sourceTrustColor: Color {
+        switch product.sourceTrustLevel {
+        case .verified:
+            return .green
+        case .community:
+            return .blue
+        case .limited:
+            return .orange
+        }
     }
 
 }

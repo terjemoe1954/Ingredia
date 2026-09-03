@@ -188,6 +188,9 @@ struct ProductResultView: View {
         )
 
         if let existing = try? modelContext.fetch(descriptor).first {
+            existing.sourceProviderID = product.sourceProviderID
+            existing.sourceProviderName = product.sourceProviderName
+            existing.sourceTrustLevelRawValue = product.sourceTrustLevelRawValue
             existing.name = product.name
             existing.brands = product.brands
             existing.ingredientsText = product.ingredientsText
@@ -203,6 +206,9 @@ struct ProductResultView: View {
 
         let savedProduct = ScannedProduct(
             barcode: product.barcode,
+            sourceProviderID: product.sourceProviderID,
+            sourceProviderName: product.sourceProviderName,
+            sourceTrustLevelRawValue: product.sourceTrustLevelRawValue,
             name: product.name,
             brands: product.brands,
             ingredientsText: product.ingredientsText,
@@ -249,14 +255,23 @@ struct ProductResultView: View {
                             .foregroundStyle(.secondary)
                     }
 
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(AppText.text(.scannedBarcode, language: language))
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                        Text(product.barcode)
-                            .font(.caption.monospaced())
-                            .foregroundStyle(.primary)
-                    }
+            VStack(alignment: .leading, spacing: 4) {
+                Text(AppText.text(.scannedBarcode, language: language))
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                Text(product.barcode)
+                    .font(.caption.monospaced())
+                    .foregroundStyle(.primary)
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(AppText.text(.dataSource, language: language))
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                Text(product.sourceProviderName)
+                    .font(.caption)
+                    .foregroundStyle(.primary)
+            }
                 }
             }
         }
@@ -369,6 +384,20 @@ struct ProductResultView: View {
             Divider()
 
             VStack(alignment: .leading, spacing: 4) {
+                Text(AppText.text(.sourceTrust, language: language))
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                Text(product.sourceTrustLevel.title(language: language))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.primary)
+                Text(product.sourceTrustLevel.detail(language: language))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Divider()
+
+            VStack(alignment: .leading, spacing: 4) {
                 Text(AppText.text(.productDataUpdated, language: language))
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
@@ -396,6 +425,8 @@ struct ProductResultView: View {
                 AppText.text(.productDataConfidence, language: language),
                 productAssessment.dataQuality.title,
                 productAssessment.dataQuality.detail,
+                AppText.text(.sourceTrust, language: language),
+                product.sourceTrustLevel.title(language: language),
                 AppText.text(.productDataUpdated, language: language),
                 product.lastModifiedAt?.formatted(date: .abbreviated, time: .omitted)
                 ?? AppText.text(.productDataUpdatedUnavailable, language: language)
@@ -469,6 +500,14 @@ private struct AlternativeRow: View {
                 .font(.caption)
                 .foregroundStyle(.tertiary)
 
+            Text(
+                AppText.text(.sourceTrust, language: language)
+                + ": "
+                + alternative.product.sourceTrustLevel.title(language: language)
+            )
+            .font(.caption)
+            .foregroundStyle(.tertiary)
+
             if !alternative.recommendationReasons.isEmpty {
                 Text(
                     alternative.recommendationReasons
@@ -487,6 +526,7 @@ private struct AlternativeRow: View {
                 alternative.product.name,
                 alternative.product.brands,
                 sourceText,
+                "\(AppText.text(.sourceTrust, language: language)): \(alternative.product.sourceTrustLevel.title(language: language))",
                 "\(AppText.text(.accessibilityStatus, language: language)): \(alternative.assessment.result.level.title)",
                 alternative.assessment.dataQuality.title,
                 alternative.recommendationReasons

@@ -4,6 +4,9 @@ import SwiftData
 @Model
 final class ScannedProduct {
     @Attribute(.unique) var barcode: String
+    var sourceProviderID: String
+    var sourceProviderName: String
+    var sourceTrustLevelRawValue: String
     var name: String
     var brands: String
     var ingredientsText: String
@@ -16,6 +19,9 @@ final class ScannedProduct {
 
     init(
         barcode: String,
+        sourceProviderID: String = "open_food_facts",
+        sourceProviderName: String = "Open Food Facts",
+        sourceTrustLevelRawValue: String = ProductSourceTrustLevel.community.rawValue,
         name: String,
         brands: String = "",
         ingredientsText: String = "",
@@ -27,6 +33,9 @@ final class ScannedProduct {
         lastScanned: Date = .now
     ) {
         self.barcode = barcode
+        self.sourceProviderID = sourceProviderID
+        self.sourceProviderName = sourceProviderName
+        self.sourceTrustLevelRawValue = sourceTrustLevelRawValue
         self.name = name
         self.brands = brands
         self.ingredientsText = ingredientsText
@@ -36,5 +45,9 @@ final class ScannedProduct {
         self.imageURLString = imageURLString
         self.lastModifiedAt = lastModifiedAt
         self.lastScanned = lastScanned
+    }
+
+    var sourceTrustLevel: ProductSourceTrustLevel {
+        ProductSourceTrustLevel(rawValue: sourceTrustLevelRawValue) ?? .community
     }
 }

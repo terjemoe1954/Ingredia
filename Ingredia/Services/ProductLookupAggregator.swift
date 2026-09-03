@@ -16,13 +16,15 @@ final class ProductLookupAggregator {
                 id: OpenFoodFactsService.shared.providerID,
                 name: OpenFoodFactsService.shared.displayName,
                 isEnabled: OpenFoodFactsService.shared.isEnabled,
-                supportsAlternativeSearch: OpenFoodFactsService.shared.supportsAlternativeSearch
+                supportsAlternativeSearch: OpenFoodFactsService.shared.supportsAlternativeSearch,
+                trustLevel: OpenFoodFactsService.shared.sourceTrustLevel
             ),
             ProductDataSourceStatus(
                 id: FoodRepoService.shared.providerID,
                 name: FoodRepoService.shared.displayName,
                 isEnabled: FoodRepoService.shared.isEnabled,
-                supportsAlternativeSearch: FoodRepoService.shared.supportsAlternativeSearch
+                supportsAlternativeSearch: FoodRepoService.shared.supportsAlternativeSearch,
+                trustLevel: FoodRepoService.shared.sourceTrustLevel
             )
         ]
     }
@@ -123,6 +125,8 @@ final class ProductLookupAggregator {
 
         return ProviderProductRecord(
             providerID: preferred.providerID,
+            providerName: mergedProviderName(lhs, rhs, fallback: preferred.providerName),
+            sourceTrustLevel: mergedTrustLevel(lhs.sourceTrustLevel, rhs.sourceTrustLevel),
             barcode: preferred.barcode,
             name: preferredNonEmptyString(lhs.name, rhs.name, fallback: preferred.name),
             brands: preferredNonEmptyString(lhs.brands, rhs.brands, fallback: preferred.brands),
@@ -149,6 +153,30 @@ final class ProductLookupAggregator {
         }
 
         return lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedDescending ? rhs : lhs
+    }
+
+    private static func mergedTrustLevel(_ lhs: ProductSourceTrustLevel, _ rhs: ProductSourceTrustLevel) -> ProductSourceTrustLevel {
+        lhs.priority >= rhs.priority ? lhs : rhs
+    }
+
+    private static func mergedProviderName(
+        _ lhs: ProviderProductRecord,
+        _ rhs: ProviderProductRecord,
+        fallback: String
+    ) -> String {
+        if lhs.providerName == rhs.providerName {
+            return lhs.providerName
+        }
+
+        let trustLevel = mergedTrustLevel(lhs.sourceTrustLevel, rhs.sourceTrustLevel)
+        switch trustLevel {
+        case .verified:
+            return "Verified sources"
+        case .community:
+            return "Community sources"
+        case .limited:
+            return fallback
+        }
     }
 
     private static func completenessScore(for record: ProviderProductRecord) -> Int {
