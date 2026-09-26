@@ -1,0 +1,186 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 1502 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(INGREDIA SUPPORT) Tj
+T*
+() Tj
+T*
+(Last updated: August 28, 2026) Tj
+T*
+() Tj
+T*
+(SUPPORT SCOPE) Tj
+T*
+() Tj
+T*
+(Ingredia helps users scan packaged food products, compare them against a personal ) Tj
+T*
+(allergy profile, and review possible alternative items.) Tj
+T*
+() Tj
+T*
+(Support can help with:) Tj
+T*
+() Tj
+T*
+(• app usage questions) Tj
+T*
+(• barcode scanning issues) Tj
+T*
+(• product lookup failures) Tj
+T*
+(• language or profile setup questions) Tj
+T*
+(• clarification about what the app can and cannot guarantee) Tj
+T*
+() Tj
+T*
+(IMPORTANT SAFETY REMINDER) Tj
+T*
+() Tj
+T*
+(Ingredia does not guarantee that a product is safe to eat.) Tj
+T*
+() Tj
+T*
+(Always check:) Tj
+T*
+() Tj
+T*
+(• packaging) Tj
+T*
+(• ingredients list) Tj
+T*
+(• allergen labeling) Tj
+T*
+(• trace warnings) Tj
+T*
+(• manufacturer updates) Tj
+T*
+() Tj
+T*
+(KNOWN LIMITATIONS) Tj
+T*
+() Tj
+T*
+(• product information depends on Open Food Facts) Tj
+T*
+(• database coverage varies by country) Tj
+T*
+(• some products may be missing) Tj
+T*
+(• some product records may be incomplete or outdated) Tj
+T*
+(• fresh lookups and alternative search require internet access) Tj
+T*
+() Tj
+T*
+(SUGGESTED TROUBLESHOOTING) Tj
+T*
+() Tj
+T*
+(SCANNER DOES NOT DETECT THE BARCODE) Tj
+T*
+() Tj
+T*
+(• confirm camera permission is enabled) Tj
+T*
+(• increase lighting) Tj
+T*
+(• move the phone slightly closer or farther away) Tj
+T*
+(• make sure the barcode is fully visible) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 843 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(• print test barcodes at full scale when possible) Tj
+T*
+() Tj
+T*
+(PRODUCT NOT FOUND) Tj
+T*
+() Tj
+T*
+(• the product may not exist in Open Food Facts) Tj
+T*
+(• the barcode may scan correctly even if no product record exists) Tj
+T*
+(• try again later in case of temporary service issues) Tj
+T*
+() Tj
+T*
+(ALTERNATIVES DO NOT APPEAR) Tj
+T*
+() Tj
+T*
+(• the product may not include enough category data) Tj
+T*
+(• the available candidate products may conflict with the active profile) Tj
+T*
+(• the network request may have failed temporarily) Tj
+T*
+() Tj
+T*
+(RELEASE CONTACT PLACEHOLDER) Tj
+T*
+() Tj
+T*
+(Before App Store release, replace this section with:) Tj
+T*
+() Tj
+T*
+(• support email) Tj
+T*
+(• support website URL) Tj
+T*
+(• response expectations if you want to publish them) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R] /Count 2 >>
+endobj
+8 0 obj
+<< /Type /Catalog /Pages 7 0 R >>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000001714 00000 n 
+0000001850 00000 n 
+0000002744 00000 n 
+0000002880 00000 n 
+0000002943 00000 n 
+trailer
+<< /Size 9 /Root 8 0 R >>
+startxref
+2992
+%%EOF

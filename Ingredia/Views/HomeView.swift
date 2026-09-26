@@ -1,0 +1,450 @@
+import SwiftUI
+import SwiftData
+
+struct HomeView: View {
+    private static let hasSeenSafetyNoticeStorageKey = "hasSeenSafetyNotice"
+
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \UserProfile.createdAt) private var profiles: [UserProfile]
+    @Query(sort: \ScannedProduct.lastScanned, order: .reverse) private var products: [ScannedProduct]
+    @AppStorage(AppLanguage.storageKey) private var selectedLanguage = AppLanguage.norwegian.rawValue
+    @AppStorage(Self.hasSeenSafetyNoticeStorageKey) private var hasSeenSafetyNotice = false
+
+    @State private var showingScanner = false
+    @State private var isLoading = false
+    @State private var errorMessage: String?
+    @State private var selectedProduct: ScannedProduct?
+    @State private var showingSafetyNotice = false
+    @State private var showingManualBarcodeEntry = false
+    @State private var showsManualBarcodeEntryAfterScannerDismiss = false
+    @State private var manualBarcode = ""
+    @State private var isScannerAvailable = true
+    @State private var lastScannedCode: String?
+
+    private var profile: UserProfile? { UserProfile.activeProfile(from: profiles) }
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 24) {
+                    profileSummaryCard
+                    scanCallToAction
+
+                    if isLoading {
+                        ProgressView(AppText.text(.loadingProductInformation, language: language))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+
+                    if let fetchErrorMessage = errorMessage {
+                        ContentUnavailableView {
+                            Label(AppText.text(.fetchProductFailed, language: language), systemImage: "exclamationmark.triangle")
+                        } description: {
+                            Text(fetchErrorMessage)
+                        } actions: {
+                            if let lastScannedCode {
+                                Button(AppText.text(.retry, language: language)) {
+                                    Task {
+                                        await lookup(code: lastScannedCode)
+                                    }
+                                }
+                            }
+
+                            Button(AppText.text(.scanAgain, language: language)) {
+                                errorMessage = nil
+                                showingScanner = true
+                            }
+                        }
+                    }
+
+                    if !products.isEmpty {
+                        VStack(alignment: .leading, spacing: 14) {
+                            Text(AppText.text(.recentlyScanned, language: language))
+                                .font(.title3.bold())
+
+                            ForEach(products.prefix(5)) { product in
+                                Button {
+                                    selectedProduct = product
+                                } label: {
+                                    RecentProductRow(product: product, profile: profile, language: language)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+                .padding()
+            }
+            .navigationTitle("Ingredia")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                    .accessibilityLabel(AppText.text(.settings, language: language))
+                }
+            }
+            .sheet(
+                isPresented: $showingScanner,
+                onDismiss: presentManualBarcodeEntryAfterScannerDismissIfNeeded
+            ) {
+                NavigationStack {
+                    ZStack {
+                        BarcodeScannerView(
+                            onCode: { code in
+                                showingScanner = false
+                                Task {
+                                    await lookup(code: code)
+                                }
+                            },
+                            onAvailabilityChanged: { isAvailable in
+                                isScannerAvailable = isAvailable
+                            },
+                            unavailableTitle: AppText.text(.cameraUnavailableTitle, language: language),
+                            unavailableMessage: AppText.text(.cameraUnavailableMessage, language: language),
+                            permissionDeniedMessage: AppText.text(.cameraPermissionDeniedMessage, language: language),
+                            openSettingsTitle: AppText.text(.openSettings, language: language)
+                        )
+                        .ignoresSafeArea()
+
+                        if isScannerAvailable {
+                            VStack {
+                                Spacer()
+                                Text(AppText.text(.positionBarcode, language: language))
+                                    .font(.headline)
+                                    .padding()
+                                    .background(.ultraThinMaterial, in: Capsule())
+                                    .padding(.bottom, 40)
+                            }
+                        }
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                showsManualBarcodeEntryAfterScannerDismiss = true
+                                showingScanner = false
+                            } label: {
+                                Label(AppText.text(.enterBarcodeManually, language: language), systemImage: "keyboard")
+                            }
+                        }
+
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(AppText.text(.close, language: language)) { showingScanner = false }
+                        }
+                    }
+                }
+            }
+            .sheet(item: $selectedProduct) { product in
+                ProductResultView(product: product, profile: profile)
+            }
+            .alert(
+                AppText.text(.manualBarcodeTitle, language: language),
+                isPresented: $showingManualBarcodeEntry
+            ) {
+                TextField(AppText.text(.barcode, language: language), text: $manualBarcode)
+                    .keyboardType(.numberPad)
+
+                Button(AppText.text(.lookupProduct, language: language)) {
+                    submitManualBarcode()
+                }
+                .disabled(normalizedManualBarcode.isEmpty)
+
+                Button(AppText.text(.cancel, language: language), role: .cancel) {}
+            } message: {
+                Text(AppText.text(.manualBarcodeMessage, language: language))
+            }
+            .sheet(isPresented: $showingSafetyNotice) {
+                SafetyNoticeView(language: language) {
+                    hasSeenSafetyNotice = true
+                    showingSafetyNotice = false
+                }
+                .interactiveDismissDisabled()
+            }
+            .task {
+                createDefaultProfileIfNeeded()
+                presentSafetyNoticeIfNeeded()
+            }
+        }
+    }
+
+    private var profileSummaryCard: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(AppText.text(.yourProfile, language: language))
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                    Text(profileDisplayName)
+                        .font(.title3.weight(.bold))
+                }
+
+                Spacer()
+
+                Image(systemName: profileHasSelections ? "checkmark.shield.fill" : "slider.horizontal.3")
+                    .font(.title2)
+                    .foregroundStyle(profileHasSelections ? Color.green : Color.orange)
+            }
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text(AppText.text(.selectedAllergens, language: language))
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+
+                if profileHasSelections {
+                    Text(selectedAllergenList)
+                        .font(.body)
+                        .foregroundStyle(.primary)
+                } else {
+                    Text(AppText.text(.noAllergensSelected, language: language))
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            Text(AppText.text(.chooseAllergensBeforeAssessment, language: language))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+        }
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(Color(.secondarySystemGroupedBackground))
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(profileAccessibilityLabel)
+    }
+
+    private var scanCallToAction: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text(AppText.text(.scanIntroTitle, language: language))
+                .font(.title2.weight(.bold))
+
+            Text(AppText.text(.scanIntroBody, language: language))
+                .font(.body)
+                .foregroundStyle(.secondary)
+
+            Button {
+                isScannerAvailable = true
+                showsManualBarcodeEntryAfterScannerDismiss = false
+                showingScanner = true
+            } label: {
+                HStack {
+                    Label(AppText.text(.scanProduct, language: language), systemImage: "barcode.viewfinder")
+                        .font(.headline)
+                    Spacer()
+                    Image(systemName: "arrow.right.circle.fill")
+                        .font(.title3)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 18)
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(.white)
+            .background(
+                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: [Color.green, Color.blue],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+            )
+
+            Button {
+                manualBarcode = ""
+                showingManualBarcodeEntry = true
+            } label: {
+                Label(AppText.text(.enterBarcodeManually, language: language), systemImage: "keyboard")
+                    .font(.subheadline.weight(.semibold))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(.secondary)
+        }
+        .padding(22)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(Color(.systemBackground))
+        )
+        .accessibilityElement(children: .contain)
+    }
+
+    private var profileHasSelections: Bool {
+        !(profile?.allergenIDs.isEmpty ?? true)
+    }
+
+    private var profileTitle: String {
+        profileHasSelections
+            ? AppText.text(.profileReadyTitle, language: language)
+            : AppText.text(.profileNotReadyTitle, language: language)
+    }
+
+    private var selectedAllergenList: String {
+        profile?.allergenIDs
+            .compactMap { AllergenDefinition.byID($0)?.localizedName(for: language) }
+            .joined(separator: " • ") ?? ""
+    }
+
+    private var profileAccessibilityLabel: String {
+        let allergens = profileHasSelections
+            ? "\(AppText.text(.accessibilitySelectedAllergens, language: language)): \(selectedAllergenList)"
+            : AppText.text(.accessibilityNoSelectedAllergens, language: language)
+
+        return [
+            AppText.text(.yourProfile, language: language),
+            profileDisplayName,
+            profileTitle,
+            allergens
+        ].joined(separator: ", ")
+    }
+
+    private var profileDisplayName: String {
+        profile?.displayName(language: language) ?? AppText.text(.defaultProfileName, language: language)
+    }
+
+    private var normalizedManualBarcode: String {
+        manualBarcode.filter(\.isNumber)
+    }
+
+    @MainActor
+    private func createDefaultProfileIfNeeded() {
+        guard profiles.isEmpty else { return }
+        modelContext.insert(UserProfile())
+        try? modelContext.save()
+    }
+
+    @MainActor
+    private func presentSafetyNoticeIfNeeded() {
+        guard !hasSeenSafetyNotice else { return }
+        showingSafetyNotice = true
+    }
+
+    @MainActor
+    private func lookup(code: String) async {
+        isLoading = true
+        errorMessage = nil
+        lastScannedCode = code
+
+        do {
+            let fetched = try await ProductLookupAggregator.shared.fetchProduct(barcode: code)
+            let fetchedBarcode = fetched.barcode
+
+            let descriptor = FetchDescriptor<ScannedProduct>(
+                predicate: #Predicate { $0.barcode == fetchedBarcode }
+            )
+
+            if let existing = try? modelContext.fetch(descriptor).first {
+                existing.updateProductData(from: fetched)
+                selectedProduct = existing
+            } else {
+                modelContext.insert(fetched)
+                selectedProduct = fetched
+            }
+
+            lastScannedCode = nil
+            try? modelContext.save()
+        } catch {
+            if let lookupError = error as? ProductLookupError {
+                errorMessage = lookupError.description(language: language)
+            } else {
+                errorMessage = error.localizedDescription
+            }
+        }
+
+        isLoading = false
+    }
+
+    @MainActor
+    private func submitManualBarcode() {
+        let code = normalizedManualBarcode
+        guard !code.isEmpty else { return }
+
+        manualBarcode = ""
+        Task {
+            await lookup(code: code)
+        }
+    }
+
+    @MainActor
+    private func presentManualBarcodeEntryAfterScannerDismissIfNeeded() {
+        guard showsManualBarcodeEntryAfterScannerDismiss else { return }
+        showsManualBarcodeEntryAfterScannerDismiss = false
+        manualBarcode = ""
+        showingManualBarcodeEntry = true
+    }
+
+    private var language: AppLanguage {
+        AppLanguage(rawValue: selectedLanguage) ?? .norwegian
+    }
+}
+
+private struct RecentProductRow: View {
+    let product: ScannedProduct
+    let profile: UserProfile?
+    let language: AppLanguage
+
+    var result: SafetyResult {
+        SafetyAnalyzer.analyze(product: product, profile: profile, language: language)
+    }
+
+    var body: some View {
+        HStack(spacing: 14) {
+            Image(systemName: result.level.systemImage)
+                .font(.title3.weight(.bold))
+                .foregroundStyle(result.level.color)
+                .frame(width: 42, height: 42)
+                .background(
+                    Circle()
+                        .fill(result.level.color.opacity(0.12))
+                )
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(product.displayName(language: language))
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+                if !product.brands.isEmpty {
+                    Text(product.brands)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                Text(result.level.title(language: language))
+                    .font(.subheadline.weight(.medium))
+                    .foregroundStyle(.secondary)
+                SourceTrustBadge(trustLevel: product.sourceTrustLevel, language: language)
+            }
+
+            Spacer()
+
+            Image(systemName: "chevron.right")
+                .foregroundStyle(.tertiary)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color(.systemBackground))
+        )
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            [
+                product.displayName(language: language),
+                product.brands,
+                "\(AppText.text(.accessibilityStatus, language: language)): \(result.level.title(language: language))",
+                "\(AppText.text(.sourceTrust, language: language)): \(product.sourceTrustLevel.title(language: language))"
+            ]
+            .filter { !$0.isEmpty }
+            .joined(separator: ", ")
+        )
+        .accessibilityHint(AppText.text(.accessibilityOpensProduct, language: language))
+    }
+
+}
