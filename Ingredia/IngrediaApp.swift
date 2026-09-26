@@ -1,3 +1,5 @@
+// Start point
+
 import SwiftUI
 import SwiftData
 
