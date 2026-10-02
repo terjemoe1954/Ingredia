@@ -1,5 +1,5 @@
 import Foundation
-
+ 
 struct AllergenDefinition: Identifiable, Hashable {
     let id: String
     let name: String
