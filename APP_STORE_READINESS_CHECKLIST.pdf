@@ -1,0 +1,406 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 2329 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+(INGREDIA APP STORE READINESS CHECKLIST) Tj
+T*
+() Tj
+T*
+(Version scope: current project state as reviewed on August 28, 2026.) Tj
+T*
+() Tj
+T*
+(RELEASE GOAL) Tj
+T*
+() Tj
+T*
+(Ship Ingredia as a conservative allergy-information utility for iPhone that helps users ) Tj
+T*
+(review packaged food products against a personal profile. The app must not imply medical) Tj
+T*
+( certainty or guaranteed food safety.) Tj
+T*
+() Tj
+T*
+(1. MANDATORY SAFETY AND TRUST GATES) Tj
+T*
+() Tj
+T*
+(• Replace any wording that could imply a guarantee of safety.) Tj
+T*
+(• Keep warning language conservative when product data is missing, incomplete, or ) Tj
+T*
+(unclear.) Tj
+T*
+(• Ensure every result view reminds the user to verify packaging and manufacturer ) Tj
+T*
+(information.) Tj
+T*
+(• Review all translations so safety wording keeps the same meaning in Norwegian, ) Tj
+T*
+(English, and Thai.) Tj
+T*
+(• Add a visible disclaimer in the App Store description and inside the app.) Tj
+T*
+(• Add a privacy policy and support URL before submission.) Tj
+T*
+() Tj
+T*
+(Release bar:) Tj
+T*
+() Tj
+T*
+(• No screen should state or imply “safe to eat”.) Tj
+T*
+(• Unknown data must stay `unknown` or `caution`, not green by default.) Tj
+T*
+(• Alternatives must never rank highly just because data is missing.) Tj
+T*
+() Tj
+T*
+(2. PRODUCT DATA QUALITY) Tj
+T*
+() Tj
+T*
+(• Replace the placeholder contact value in the `User-Agent` header in [OpenFoodFactsServ) Tj
+T*
+(ice.swift]\(/Users/terjemoe/Desktop/MyApps/Ingredia/Ingredia/Services/OpenFoodFactsServic) Tj
+T*
+(e.swift\).) Tj
+T*
+(• Decide what country and market behavior should be documented for launch.) Tj
+T*
+(• Review how category labels from Open Food Facts behave across different markets.) Tj
+T*
+(• Add clearer handling for stale or low-confidence records if the source data is weak.) Tj
+T*
+(• Verify that barcodes from several countries return sensible results and do not break ) Tj
+T*
+(ranking.) Tj
+T*
+() Tj
+T*
+(Release bar:) Tj
+T*
+() Tj
+T*
+(• Barcode lookup works reliably on real devices over normal mobile data and Wi-Fi.) Tj
+T*
+(• The app handles `not found`, `offline`, `timeout`, and server issues with user-) Tj
+T*
+(readable messages.) Tj
+T*
+(• Product data confidence is shown consistently on result screens.) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 1948 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+() Tj
+T*
+(3. FUNCTIONAL COMPLETION) Tj
+T*
+() Tj
+T*
+(• Confirm the full core loop is complete:) Tj
+T*
+(• profile setup) Tj
+T*
+(• scan) Tj
+T*
+(• product assessment) Tj
+T*
+(• explanation of findings) Tj
+T*
+(• product data confidence) Tj
+T*
+(• alternative suggestions) Tj
+T*
+(• history) Tj
+T*
+(• restaurant card) Tj
+T*
+(• in-app help) Tj
+T*
+(• Tighten the alternative ranking logic with more edge-case tests.) Tj
+T*
+(• Decide whether users need manual retry controls after failed lookups.) Tj
+T*
+(• Decide whether history should support delete/clear actions before release.) Tj
+T*
+() Tj
+T*
+(Release bar:) Tj
+T*
+() Tj
+T*
+(• No dead ends in the main user flow.) Tj
+T*
+(• The app remains useful when no alternatives are available.) Tj
+T*
+(• Cached products remain readable offline.) Tj
+T*
+() Tj
+T*
+(4. ACCESSIBILITY) Tj
+T*
+() Tj
+T*
+(• Test Dynamic Type across standard and large accessibility sizes.) Tj
+T*
+(• Test VoiceOver on all tabs and result sections.) Tj
+T*
+(• Confirm status is not communicated by color alone.) Tj
+T*
+(• Check contrast in caution, avoid, and data-quality states.) Tj
+T*
+(• Verify button sizes and tap targets.) Tj
+T*
+() Tj
+T*
+(Release bar:) Tj
+T*
+() Tj
+T*
+(• Main actions remain usable at large text sizes.) Tj
+T*
+(• VoiceOver can identify scan, profile, result, and help content clearly.) Tj
+T*
+() Tj
+T*
+(5. PRIVACY AND LEGAL) Tj
+T*
+() Tj
+T*
+(• Draft a privacy policy covering camera use, network requests, and local storage.) Tj
+T*
+(• Draft support contact information and a support page.) Tj
+T*
+(• Confirm no sensitive user profile data is transmitted to external services beyond ) Tj
+T*
+(product lookup requirements.) Tj
+T*
+(• Document that product information comes from Open Food Facts and can be incomplete or ) Tj
+T*
+(outdated.) Tj
+T*
+(• Check App Store review guidance for health-related or safety-adjacent wording.) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 1766 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+() Tj
+T*
+(Release bar:) Tj
+T*
+() Tj
+T*
+(• Privacy policy URL is ready.) Tj
+T*
+(• Support URL is ready.) Tj
+T*
+(• Marketing copy stays within what the app can actually guarantee.) Tj
+T*
+() Tj
+T*
+(6. QA AND TESTING) Tj
+T*
+() Tj
+T*
+(• Expand unit tests for allergen matching edge cases:) Tj
+T*
+(• false positives from ingredient keyword matching) Tj
+T*
+(• localized ingredient naming) Tj
+T*
+(• trace handling with `rejectMayContain` on and off) Tj
+T*
+(• multiple allergen conflicts in one product) Tj
+T*
+(• ambiguous or incomplete data) Tj
+T*
+(• Add UI tests for:) Tj
+T*
+(• first-run profile setup) Tj
+T*
+(• scan flow) Tj
+T*
+(• failed lookup flow) Tj
+T*
+(• history reopen flow) Tj
+T*
+(• language switching) Tj
+T*
+(• help screen access) Tj
+T*
+(• restaurant card rendering) Tj
+T*
+(• Test on multiple device sizes.) Tj
+T*
+(• Test with low bandwidth and airplane-mode scenarios.) Tj
+T*
+() Tj
+T*
+(Release bar:) Tj
+T*
+() Tj
+T*
+(• Green build.) Tj
+T*
+(• Automated tests cover core logic and key user flows.) Tj
+T*
+(• Real-device test pass with printed barcodes and real product packaging.) Tj
+T*
+() Tj
+T*
+(7. APP STORE PACKAGING) Tj
+T*
+() Tj
+T*
+(• Create app icon set for all required sizes.) Tj
+T*
+(• Create launch-ready screenshots for supported devices.) Tj
+T*
+(• Write App Store subtitle, promotional text, keywords, and description.) Tj
+T*
+(• Prepare privacy nutrition labels in App Store Connect.) Tj
+T*
+(• Decide initial availability countries.) Tj
+T*
+(• Confirm age rating inputs.) Tj
+T*
+() Tj
+T*
+(Release bar:) Tj
+T*
+() Tj
+T*
+(• Store metadata is complete and consistent with the actual app behavior.) Tj
+T*
+(• Screenshots do not overpromise medical safety.) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 1233 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54.00 738.00 Tm
+() Tj
+T*
+(8. RECOMMENDED PRE-LAUNCH IMPROVEMENTS) Tj
+T*
+() Tj
+T*
+(• Add onboarding for first-time users.) Tj
+T*
+(• Add a retry action for lookup failures.) Tj
+T*
+(• Add a way to delete individual history items.) Tj
+T*
+(• Consider a dedicated disclaimer screen on first launch.) Tj
+T*
+(• Improve category normalization for alternative matching.) Tj
+T*
+(• Add more visible timestamps or freshness signals for cached product data.) Tj
+T*
+() Tj
+T*
+(9. NICE-TO-HAVE AFTER MVP RELEASE) Tj
+T*
+() Tj
+T*
+(• Favorites) Tj
+T*
+(• better offline product support) Tj
+T*
+(• country-aware product prioritization) Tj
+T*
+(• additional restaurant card languages) Tj
+T*
+(• manufacturer verification or trust tiers) Tj
+T*
+(• family profiles and multi-user workflows) Tj
+T*
+(• subscription or premium tier only after reliability is proven) Tj
+T*
+() Tj
+T*
+(SUGGESTED RELEASE SEQUENCE) Tj
+T*
+() Tj
+T*
+(1. Finish safety, privacy, and error-handling gaps.) Tj
+T*
+(2. Improve tests and real-device validation.) Tj
+T*
+(3. Prepare App Store assets and legal pages.) Tj
+T*
+(4. Run a small private beta with allergy-aware testers.) Tj
+T*
+(5. Fix beta findings before App Store submission.) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R] /Count 4 >>
+endobj
+12 0 obj
+<< /Type /Catalog /Pages 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000002541 00000 n 
+0000002678 00000 n 
+0000004678 00000 n 
+0000004815 00000 n 
+0000006633 00000 n 
+0000006770 00000 n 
+0000008055 00000 n 
+0000008193 00000 n 
+0000008270 00000 n 
+trailer
+<< /Size 13 /Root 12 0 R >>
+startxref
+8321
+%%EOF
