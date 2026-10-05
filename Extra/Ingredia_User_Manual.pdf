@@ -1,0 +1,688 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 1929 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54 738 Tm
+(INGREDIA USER MANUAL) Tj
+T*
+() Tj
+T*
+(OVERVIEW) Tj
+T*
+() Tj
+T*
+(Ingredia is an iPhone app that helps users check packaged food products against a ) Tj
+T*
+(personal allergy or intolerance profile. The app scans a barcode, looks up product ) Tj
+T*
+(information, compares that information with the active profile, and may suggest ) Tj
+T*
+(alternative products in the same category.) Tj
+T*
+() Tj
+T*
+(Ingredia is a decision-support tool only. It does not guarantee that a product is safe. ) Tj
+T*
+(Always check the packaging, ingredients list, allergen statement, and the manufacturer’s) Tj
+T*
+( latest information.) Tj
+T*
+() Tj
+T*
+(MAIN TABS) Tj
+T*
+() Tj
+T*
+(Ingredia has four main tabs:) Tj
+T*
+() Tj
+T*
+(• `Skann` / `Scan`: Scan a product barcode and review the result.) Tj
+T*
+(• `Historikk` / `History`: Open previously scanned products.) Tj
+T*
+(• `Restaurantkort` / `Restaurant Card`: Show an allergy card based on the active ) Tj
+T*
+(profile.) Tj
+T*
+(• `Profil` / `Profile`: Manage allergy settings, cross-contamination preference, ) Tj
+T*
+(language, and notes.) Tj
+T*
+() Tj
+T*
+(BEFORE FIRST USE) Tj
+T*
+() Tj
+T*
+(1. Open the `Profil` tab.) Tj
+T*
+(2. Review the default profile or create a new one.) Tj
+T*
+(3. Select the allergens or intolerances that apply.) Tj
+T*
+(4. Decide whether `may contain traces of` warnings should be treated as unacceptable.) Tj
+T*
+(5. Optionally add a restaurant note for staff.) Tj
+T*
+(6. Choose the app language.) Tj
+T*
+() Tj
+T*
+(The app creates a default profile automatically if none exists.) Tj
+T*
+() Tj
+T*
+(CAMERA PERMISSION) Tj
+T*
+() Tj
+T*
+(Ingredia uses the iPhone camera to scan barcodes. The app requires camera access the ) Tj
+T*
+(first time scanning is used.) Tj
+T*
+() Tj
+T*
+(If scanning does not open correctly:) Tj
+T*
+() Tj
+T*
+(1. Open iPhone `Settings`.) Tj
+T*
+(2. Find `Ingredia`.) Tj
+T*
+(3. Confirm that camera access is enabled.) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 1435 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54 738 Tm
+() Tj
+T*
+(SUPPORTED BARCODE TYPES) Tj
+T*
+() Tj
+T*
+(Ingredia currently scans these barcode formats:) Tj
+T*
+() Tj
+T*
+(• `EAN-8`) Tj
+T*
+(• `EAN-13`) Tj
+T*
+(• `UPC-E`) Tj
+T*
+(• `Code 128`) Tj
+T*
+() Tj
+T*
+(HOW TO SCAN A PRODUCT) Tj
+T*
+() Tj
+T*
+(1. Open the `Skann` / `Scan` tab.) Tj
+T*
+(2. Tap the main scan button.) Tj
+T*
+(3. Place the barcode inside the camera frame.) Tj
+T*
+(4. Hold the phone steady until the app detects the code.) Tj
+T*
+(5. Wait while Ingredia fetches product information.) Tj
+T*
+() Tj
+T*
+(If a product is found, the result screen opens automatically.) Tj
+T*
+() Tj
+T*
+(If the product cannot be found or the request fails, Ingredia shows an error message.) Tj
+T*
+() Tj
+T*
+(UNDERSTANDING THE RESULT SCREEN) Tj
+T*
+() Tj
+T*
+(The result screen is designed to answer six questions:) Tj
+T*
+() Tj
+T*
+(1. What product was scanned?) Tj
+T*
+(2. Is there a conflict with the active profile?) Tj
+T*
+(3. Why did the app reach that conclusion?) Tj
+T*
+(4. How complete is the available product data?) Tj
+T*
+(5. What should still be checked on the packaging?) Tj
+T*
+(6. Are there better alternatives?) Tj
+T*
+() Tj
+T*
+(PRODUCT SUMMARY) Tj
+T*
+() Tj
+T*
+(The top section shows:) Tj
+T*
+() Tj
+T*
+(• Product name) Tj
+T*
+(• Brand) Tj
+T*
+(• Barcode) Tj
+T*
+(• Product image when available) Tj
+T*
+() Tj
+T*
+(ASSESSMENT LEVELS) Tj
+T*
+() Tj
+T*
+(Ingredia may show one of these result levels:) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 1705 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54 738 Tm
+() Tj
+T*
+(• `Ingen registrerte konflikter` / `No registered conflicts`) Tj
+T*
+(• `Kontroller produktet` / `Check the product`) Tj
+T*
+(• `Ikke anbefalt` / `Not recommended`) Tj
+T*
+(• `For lite informasjon` / `Too little information`) Tj
+T*
+() Tj
+T*
+(These levels are based on the active profile and the available product data.) Tj
+T*
+() Tj
+T*
+(WHY A PRODUCT WAS FLAGGED) Tj
+T*
+() Tj
+T*
+(If Ingredia detects possible conflicts, it lists the matching allergens and whether they) Tj
+T*
+( appear as:) Tj
+T*
+() Tj
+T*
+(• a registered ingredient or allergen) Tj
+T*
+(• a trace or cross-contamination warning) Tj
+T*
+() Tj
+T*
+(If the profile is set to reject trace warnings, a matching `may contain` warning can ) Tj
+T*
+(make the product `Not recommended`.) Tj
+T*
+() Tj
+T*
+(DATA CONFIDENCE) Tj
+T*
+() Tj
+T*
+(Ingredia also shows a `Datagrunnlag` / `Data confidence` section for the scanned ) Tj
+T*
+(product.) Tj
+T*
+() Tj
+T*
+(Possible values:) Tj
+T*
+() Tj
+T*
+(• `Høy datakvalitet` / `High data quality`) Tj
+T*
+(• `Begrenset informasjon` / `Limited information`) Tj
+T*
+(• `Ukjent datagrunnlag` / `Unknown data basis`) Tj
+T*
+() Tj
+T*
+(This section helps explain how complete the available ingredient, allergen, and category) Tj
+T*
+( data appears to be. It may also show the latest known product update date when that ) Tj
+T*
+(information exists.) Tj
+T*
+() Tj
+T*
+(IMPORTANT REMINDER) Tj
+T*
+() Tj
+T*
+(Even when Ingredia finds no registered conflict, users should still verify:) Tj
+T*
+() Tj
+T*
+(• the ingredients list) Tj
+T*
+(• allergen statements) Tj
+T*
+(• trace warnings) Tj
+T*
+(• recent packaging changes) Tj
+T*
+() Tj
+T*
+(BETTER ALTERNATIVES) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 1672 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54 738 Tm
+(If the scanned product has a conflict or should be checked, Ingredia may show `Bedre ) Tj
+T*
+(alternativer` / `Better alternatives`.) Tj
+T*
+() Tj
+T*
+(Alternative suggestions are built from products in the same or a similar category and ) Tj
+T*
+(are evaluated against the full active profile, not only one allergen.) Tj
+T*
+() Tj
+T*
+(Ingredia prefers alternatives that:) Tj
+T*
+() Tj
+T*
+(• do not conflict with the active profile) Tj
+T*
+(• respect the trace-warning preference) Tj
+T*
+(• match the scanned product category) Tj
+T*
+(• have more complete product data) Tj
+T*
+(• have newer product data when available) Tj
+T*
+() Tj
+T*
+(Ingredia may label an alternative as:) Tj
+T*
+() Tj
+T*
+(• `Fra historikk` / `From history`) Tj
+T*
+(• `Fra Open Food Facts` / `From Open Food Facts`) Tj
+T*
+() Tj
+T*
+(Users can also hide unclear suggestions with the `Hide unknown suggestions` filter.) Tj
+T*
+() Tj
+T*
+(HISTORY) Tj
+T*
+() Tj
+T*
+(The `Historikk` / `History` tab stores previously scanned products locally on the ) Tj
+T*
+(device.) Tj
+T*
+() Tj
+T*
+(From this screen, users can:) Tj
+T*
+() Tj
+T*
+(• review earlier scans) Tj
+T*
+(• reopen a product result) Tj
+T*
+(• see the last scanned date) Tj
+T*
+() Tj
+T*
+(If the same barcode is scanned again later, Ingredia fetches live product data again and) Tj
+T*
+( updates the local record.) Tj
+T*
+() Tj
+T*
+(PROFILES) Tj
+T*
+() Tj
+T*
+(The `Profil` / `Profile` tab supports multiple profiles.) Tj
+T*
+() Tj
+T*
+(Users can:) Tj
+T*
+() Tj
+T*
+(• switch the active profile) Tj
+T*
+(• create a new profile) Tj
+T*
+(• duplicate a profile) Tj
+T*
+(• delete a profile when more than one exists) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 1454 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54 738 Tm
+(• rename a profile) Tj
+T*
+(• choose allergens and intolerances) Tj
+T*
+(• set cross-contamination preference) Tj
+T*
+(• add a restaurant note) Tj
+T*
+(• change the app language) Tj
+T*
+() Tj
+T*
+(Changes are saved automatically.) Tj
+T*
+() Tj
+T*
+(RESTAURANT CARD) Tj
+T*
+() Tj
+T*
+(The `Restaurantkort` / `Restaurant Card` tab creates a visual card based on the active ) Tj
+T*
+(profile.) Tj
+T*
+() Tj
+T*
+(It shows:) Tj
+T*
+() Tj
+T*
+(• the selected allergens) Tj
+T*
+(• a cross-contamination warning when enabled) Tj
+T*
+(• an optional restaurant note) Tj
+T*
+(• a reminder to verify ingredients and preparation) Tj
+T*
+() Tj
+T*
+(This card is meant to be shown to restaurant staff. It supports the current app ) Tj
+T*
+(languages:) Tj
+T*
+() Tj
+T*
+(• Norwegian) Tj
+T*
+(• English) Tj
+T*
+(• Thai) Tj
+T*
+() Tj
+T*
+(WHERE THE PRODUCT INFORMATION COMES FROM) Tj
+T*
+() Tj
+T*
+(Ingredia currently uses `Open Food Facts` as its product data source.) Tj
+T*
+() Tj
+T*
+(The app uses live network requests to:) Tj
+T*
+() Tj
+T*
+(• fetch the scanned product) Tj
+T*
+(• search for alternative products in similar categories) Tj
+T*
+() Tj
+T*
+(Ingredia also stores scanned and viewed products locally so they remain available in ) Tj
+T*
+(history.) Tj
+T*
+() Tj
+T*
+(INTERNATIONAL USE) Tj
+T*
+() Tj
+T*
+(Ingredia uses the global Open Food Facts database, so it can work abroad.) Tj
+T*
+() Tj
+T*
+(Important limitations:) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 1844 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54 738 Tm
+(• product coverage varies by country) Tj
+T*
+(• some markets have more complete data than others) Tj
+T*
+(• category quality may vary) Tj
+T*
+(• missing or outdated records can affect results) Tj
+T*
+() Tj
+T*
+(International support should therefore be treated as useful but not equally reliable in ) Tj
+T*
+(every country.) Tj
+T*
+() Tj
+T*
+(OFFLINE AND NETWORK BEHAVIOR) Tj
+T*
+() Tj
+T*
+(Current behavior:) Tj
+T*
+() Tj
+T*
+(• scanning and fresh product lookup require internet access) Tj
+T*
+(• previously stored products remain available locally in history) Tj
+T*
+(• the app is not yet a full offline product database) Tj
+T*
+() Tj
+T*
+(If there is no connection, Ingredia may show an offline or timeout error instead of ) Tj
+T*
+(fresh results.) Tj
+T*
+() Tj
+T*
+(TROUBLESHOOTING) Tj
+T*
+() Tj
+T*
+(THE SCANNER DOES NOT WORK) Tj
+T*
+() Tj
+T*
+(• Confirm camera permission is enabled in iPhone settings.) Tj
+T*
+(• Make sure the barcode is well lit and fully visible.) Tj
+T*
+(• Try moving the phone slightly closer or farther away.) Tj
+T*
+() Tj
+T*
+(THE PRODUCT IS NOT FOUND) Tj
+T*
+() Tj
+T*
+(• The barcode may not exist in Open Food Facts.) Tj
+T*
+(• The code may be valid but not yet available in the database.) Tj
+T*
+(• Try scanning again with better focus.) Tj
+T*
+() Tj
+T*
+(THE RESULT SEEMS INCOMPLETE) Tj
+T*
+() Tj
+T*
+(• Some products have missing ingredient or allergen data.) Tj
+T*
+(• Open Food Facts is a public database and quality varies.) Tj
+T*
+(• Always compare the result with the package label.) Tj
+T*
+() Tj
+T*
+(NO ALTERNATIVES APPEAR) Tj
+T*
+() Tj
+T*
+(• The product may not have enough category data.) Tj
+T*
+(• Similar products may not exist in the available database.) Tj
+T*
+(• Candidate products may be rejected because they conflict with the active profile.) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 543 >>
+stream
+BT
+/F1 11 Tf
+15 TL
+1 0 0 1 54 738 Tm
+(SAFETY NOTICE) Tj
+T*
+() Tj
+T*
+(Ingredia must not be used as the only basis for a medical or dietary decision.) Tj
+T*
+() Tj
+T*
+(Always:) Tj
+T*
+() Tj
+T*
+(• read the package) Tj
+T*
+(• verify the manufacturer’s latest information) Tj
+T*
+(• treat unknown or limited data with caution) Tj
+T*
+(• use extra care for severe allergies and cross-contamination risk) Tj
+T*
+() Tj
+T*
+(VERSION SCOPE) Tj
+T*
+() Tj
+T*
+(This manual describes the current MVP behavior in the project as of `August 28, 2026`.) Tj
+ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 16 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R] /Count 7 >>
+endobj
+17 0 obj
+<< /Type /Catalog /Pages 16 0 R >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000002066 00000 n 
+0000002193 00000 n 
+0000003680 00000 n 
+0000003807 00000 n 
+0000005564 00000 n 
+0000005691 00000 n 
+0000007415 00000 n 
+0000007542 00000 n 
+0000009049 00000 n 
+0000009178 00000 n 
+0000011075 00000 n 
+0000011204 00000 n 
+0000011799 00000 n 
+0000011928 00000 n 
+0000012025 00000 n 
+trailer
+<< /Size 18 /Root 17 0 R >>
+startxref
+12076
+%%EOF
