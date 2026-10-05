@@ -1,4 +1,4 @@
-//  Start point 1
+//  Start point
 
 import SwiftUI
 import SwiftData
