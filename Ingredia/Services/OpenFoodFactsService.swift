@@ -248,9 +248,16 @@ final class OpenFoodFactsService: ProductDataProvider {
 
         let decoded: OFFSearchResponse = try await Self.fetch(url: components.url)
         return decoded.products.compactMap { product in
-            let record = Self.makeRecord(from: product, providerID: providerID)
-            guard record.barcode != excludedBarcode else { return nil }
-            return record
+            guard let barcode = Self.validSearchBarcode(product.code),
+                  barcode != excludedBarcode else {
+                return nil
+            }
+
+            return Self.makeRecord(
+                from: product,
+                fallbackBarcode: barcode,
+                providerID: providerID
+            )
         }
     }
 
@@ -259,7 +266,7 @@ final class OpenFoodFactsService: ProductDataProvider {
             throw ProductLookupError.badResponse
         }
 
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: url, timeoutInterval: 15)
         request.setValue(AppMetadata.userAgent, forHTTPHeaderField: "User-Agent")
 
         let (data, response): (Data, URLResponse)
@@ -308,7 +315,16 @@ final class OpenFoodFactsService: ProductDataProvider {
     static func normalizedBarcode(_ barcode: String?, fallback: String? = nil) -> String {
         ProductDataCompleteness.normalizedText(barcode)
         ?? ProductDataCompleteness.normalizedText(fallback)
-        ?? UUID().uuidString
+        ?? ""
+    }
+
+    static func validSearchBarcode(_ barcode: String?) -> String? {
+        guard let normalized = ProductDataCompleteness.normalizedText(barcode),
+              normalized.allSatisfy(\.isNumber) else {
+            return nil
+        }
+
+        return normalized
     }
 
     static func normalizedOptionalText(_ value: String?) -> String? {

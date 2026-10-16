@@ -9,6 +9,7 @@ struct HomeView: View {
     @Query(sort: \ScannedProduct.lastScanned, order: .reverse) private var products: [ScannedProduct]
     @AppStorage(AppLanguage.storageKey) private var selectedLanguage = AppLanguage.norwegian.rawValue
     @AppStorage(Self.hasSeenSafetyNoticeStorageKey) private var hasSeenSafetyNotice = false
+    @ScaledMetric(relativeTo: .body) private var bottomScrollContentMargin: CGFloat = 64
 
     @State private var showingScanner = false
     @State private var isLoading = false
@@ -75,6 +76,7 @@ struct HomeView: View {
                 }
                 .padding()
             }
+            .contentMargins(.bottom, bottomScrollContentMargin, for: .scrollContent)
             .navigationTitle("Ingredia")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -386,6 +388,8 @@ struct HomeView: View {
 }
 
 private struct RecentProductRow: View {
+    @ScaledMetric(relativeTo: .title3) private var statusIconSize: CGFloat = 42
+
     let product: ScannedProduct
     let profile: UserProfile?
     let language: AppLanguage
@@ -399,7 +403,7 @@ private struct RecentProductRow: View {
             Image(systemName: result.level.systemImage)
                 .font(.title3.weight(.bold))
                 .foregroundStyle(result.level.color)
-                .frame(width: 42, height: 42)
+                .frame(width: statusIconSize, height: statusIconSize)
                 .background(
                     Circle()
                         .fill(result.level.color.opacity(0.12))
@@ -413,7 +417,6 @@ private struct RecentProductRow: View {
                     Text(product.brands)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .lineLimit(1)
                 }
                 Text(result.level.title(language: language))
                     .font(.subheadline.weight(.medium))

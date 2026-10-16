@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SafetyNoticeView: View {
+    @ScaledMetric(relativeTo: .largeTitle) private var heroIconSize: CGFloat = 72
+
     let language: AppLanguage
     let onContinue: () -> Void
 
@@ -41,7 +43,7 @@ struct SafetyNoticeView: View {
                 .foregroundStyle(.white)
                 .background(
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        .fill(Color.green)
+                        .fill(Color(red: 0, green: 0.38, blue: 0.17))
                 )
                 .padding(.horizontal)
                 .padding(.top, 8)
@@ -54,9 +56,9 @@ struct SafetyNoticeView: View {
     private var hero: some View {
         VStack(alignment: .leading, spacing: 14) {
             Image(systemName: "exclamationmark.shield.fill")
-                .font(.system(size: 40, weight: .bold))
+                .font(.largeTitle.weight(.bold))
                 .foregroundStyle(.white)
-                .frame(width: 72, height: 72)
+                .frame(width: heroIconSize, height: heroIconSize)
                 .background(
                     Circle()
                         .fill(
@@ -67,6 +69,7 @@ struct SafetyNoticeView: View {
                             )
                         )
                 )
+                .accessibilityHidden(true)
 
             Text(AppText.text(.safetyNoticeHeadline, language: language))
                 .font(.title2.weight(.bold))

@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct RestaurantCardView: View {
+    @ScaledMetric(relativeTo: .largeTitle) private var heroIconSize: CGFloat = 84
     @Query(sort: \UserProfile.createdAt) private var profiles: [UserProfile]
     @AppStorage(AppLanguage.storageKey) private var selectedLanguage = AppLanguage.norwegian.rawValue
 
@@ -30,9 +31,9 @@ struct RestaurantCardView: View {
     private var cardHeader: some View {
         VStack(spacing: 10) {
             Image(systemName: "exclamationmark.shield.fill")
-                .font(.system(size: 48, weight: .bold))
+                .font(.largeTitle.weight(.bold))
                 .foregroundStyle(.white)
-                .frame(width: 84, height: 84)
+                .frame(width: heroIconSize, height: heroIconSize)
                 .background(
                     Circle()
                         .fill(
@@ -43,6 +44,7 @@ struct RestaurantCardView: View {
                             )
                         )
                 )
+                .accessibilityHidden(true)
 
             Text(AppText.text(.allergyCardTitle, language: language))
                 .font(.system(.largeTitle, design: .rounded, weight: .heavy))

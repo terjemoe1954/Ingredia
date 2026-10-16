@@ -17,6 +17,7 @@ struct ProductResultView: View {
     @State private var alternativesErrorMessage: String?
     @State private var alternativeOutcome: AlternativeLookupOutcome?
     @State private var selectedAlternativeProduct: ScannedProduct?
+    @ScaledMetric(relativeTo: .body) private var productImageSize: CGFloat = 96
 
     private var productAssessment: ProductSafetyAssessment {
         AlternativeRankingService.assessment(for: product, profile: profile, language: language)
@@ -307,12 +308,13 @@ struct ProductResultView: View {
                 .padding(8)
             }
         }
-        .frame(width: 96, height: 96)
+        .frame(width: productImageSize, height: productImageSize)
         .background(
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .fill(Color(.systemBackground))
         )
         .clipShape(RoundedRectangle(cornerRadius: 18))
+        .accessibilityHidden(true)
     }
 
     private var assessmentCard: some View {
@@ -559,7 +561,6 @@ private struct AlternativeRow: View {
                 .font(.caption.weight(.bold))
             Text(alternative.assessment.result.level.title(language: language))
                 .font(.caption.weight(.semibold))
-                .lineLimit(1)
         }
         .foregroundStyle(alternative.assessment.result.level.color)
         .padding(.horizontal, 10)

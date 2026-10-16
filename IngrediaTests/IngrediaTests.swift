@@ -1091,6 +1091,10 @@ struct IngrediaTests {
         #expect(OpenFoodFactsService.normalizedBarcode(" 12345 ", fallback: " 67890 ") == "12345")
         #expect(OpenFoodFactsService.normalizedBarcode(" ", fallback: " 67890 ") == "67890")
         #expect(OpenFoodFactsService.normalizedBarcode(" 12345 ") == "12345")
+        #expect(OpenFoodFactsService.normalizedBarcode(nil) == "")
+        #expect(OpenFoodFactsService.validSearchBarcode(" 12345 ") == "12345")
+        #expect(OpenFoodFactsService.validSearchBarcode(nil) == nil)
+        #expect(OpenFoodFactsService.validSearchBarcode("abc") == nil)
         #expect(OpenFoodFactsService.normalizedOptionalText(" https://example.com/image.png ") == "https://example.com/image.png")
         #expect(OpenFoodFactsService.normalizedOptionalText(" ") == nil)
     }
