@@ -14,6 +14,12 @@ struct ProfileView: View {
 
     private var profile: UserProfile? { UserProfile.activeProfile(from: profiles) }
 
+    private func allergenCountText(for profile: UserProfile) -> String {
+        let count = profile.allergenIDs.count
+        let key: AppTextKey = count == 1 ? .selectedAllergen : .selectedAllergens
+        return "\(count) \(AppText.text(key, language: language).lowercased())"
+    }
+
     var body: some View {
         NavigationStack {
             Group {
@@ -33,7 +39,7 @@ struct ProfileView: View {
                                             VStack(alignment: .leading, spacing: 4) {
                                                 Text(candidate.displayName(language: language))
                                                     .foregroundStyle(.primary)
-                                                Text("\(candidate.allergenIDs.count) \(AppText.text(.selectedAllergens, language: language).lowercased())")
+                                                Text(allergenCountText(for: candidate))
                                                     .font(.caption)
                                                     .foregroundStyle(.secondary)
                                             }

@@ -64,6 +64,7 @@ enum AppTextKey {
     case profileReadyTitle
     case profileNotReadyTitle
     case selectedAllergens
+    case selectedAllergen
     case noAllergensSelected
     case scanIntroTitle
     case scanIntroBody
@@ -256,6 +257,7 @@ enum AppText {
         case .profileReadyTitle: "Profil klar"
         case .profileNotReadyTitle: "Profil mangler detaljer"
         case .selectedAllergens: "Valgte allergener"
+        case .selectedAllergen: "Valgt allergen"
         case .noAllergensSelected: "Ingen allergener valgt ennå"
         case .scanIntroTitle: "Skann for en rask vurdering"
         case .scanIntroBody: "Sjekk produktdata mot profilen din og få forslag til bedre alternativer når det finnes relevante treff."
@@ -437,6 +439,7 @@ enum AppText {
         case .profileReadyTitle: "Profile ready"
         case .profileNotReadyTitle: "Profile needs details"
         case .selectedAllergens: "Selected allergens"
+        case .selectedAllergen: "Selected allergen"
         case .noAllergensSelected: "No allergens selected yet"
         case .scanIntroTitle: "Scan for a quick assessment"
         case .scanIntroBody: "Check product data against your profile and get better alternatives when relevant matches are available."
@@ -618,6 +621,7 @@ enum AppText {
         case .profileReadyTitle: "โปรไฟล์พร้อมใช้งาน"
         case .profileNotReadyTitle: "โปรไฟล์ยังไม่ครบ"
         case .selectedAllergens: "สารก่อภูมิแพ้ที่เลือก"
+        case .selectedAllergen: "สารก่อภูมิแพ้ที่เลือก"
         case .noAllergensSelected: "ยังไม่ได้เลือกสารก่อภูมิแพ้"
         case .scanIntroTitle: "สแกนเพื่อประเมินอย่างรวดเร็ว"
         case .scanIntroBody: "ตรวจสอบข้อมูลสินค้ากับโปรไฟล์ของคุณ และรับคำแนะนำทางเลือกที่ดีกว่าเมื่อมีข้อมูลที่เกี่ยวข้อง."

@@ -49,7 +49,11 @@ struct IngrediaTests {
             allergens: [" EN:milk "]
         )
 
-        let result = SafetyAnalyzer.analyze(product: product, profile: profile)
+        let result = SafetyAnalyzer.analyze(
+            product: product,
+            profile: profile,
+            language: .norwegian
+        )
 
         #expect(result.level == .avoid)
         #expect(result.findings.first?.allergenName == "Melk")
